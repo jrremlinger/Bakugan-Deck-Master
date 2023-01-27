@@ -1,4 +1,4 @@
-// on window load
+// Test deck immdeiately
 $(window).on("load", function() {
 	checkValidDecks();
 	tryDeck(0);
