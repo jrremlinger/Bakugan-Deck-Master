@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="assets/style.css">
+	<title>Bakugan Deck Master</title>
+</head>
+<body>
+	<div id="menu_main" style="display: none;">
+		<h1>Bakugan Deck Master</h1>
+		<button id="brawl" onclick="$('#menu_main').hide(); $('#deck_select_menu').show(); checkValidDecks();">Brawl!</button>
+		<button id="deck_builder" onclick="$('#menu_main').hide(); $('#menu_deck_options').show();">Deck Builder</button>
+	</div>
+	<!-- Menu for selecting a deck -->
+	<div id="deck_select_menu" style="display: none;">
+		<!-- Menu for selecting a deck -->
+		<div id="deck_select_title">Choose from these valid decks!</div>
+		<!-- Button to go back to main menu -->
+		<button id="menu_deck_options_button_back" onclick="$('#deck_select_menu').hide(); $('#menu_main').show();">Back</button>
+		<div id="deck_select"></div>
+	</div>
+
+
+
+	<!-- UI for the actual brawl card user-->
+	<div id="brawl_ui">
+		<div id="brawl_overlay" style="display: none;">
+			<img class="overlay_normal" id="brawl_overlay_image" src="" alt="">
+			<div  id="brawl_overlay_buttons"></div>
+		</div>
+		<div id="brawl_header">
+			<div id="brawl_header_start">
+				<div id="brawl_title">Bakugan Deck Master</div>
+				<button id="header_bar_button_hide" onclick="$('#brawl_ui').hide(); $('#menu_main').show();">Exit</button>
+			</div>
+			<div id="brawl_header_end">
+				<button id="button_reset" onclick="resetBrawl()">Reset</button>
+				<button id="button_clear_batch" onclick="clearBatch()">Clear Batch</button>
+			</div>
+		</div>
+		<div class="brawl_row" id="brawl_batch">
+			<img class="brawl_cardimg" src="assets/cards/Batch.png">
+		</div>
+		<div class="brawl_row2">
+			<div id="brawl_deck_column">
+				<div id="brawl_deck_total">40</div>
+				<img class="brawl_cardimg" id="brawl_deck" src="assets/cards/BBPAC-Dark.png">
+				
+				<img class="brawl_cardimg" id="brawl_discard" src="assets/cards/Discard.png">
+				<div id="brawl_energy">
+					<div id="energy_title">Energy</div>
+					<div id="energy_container">
+						
+						<div class="energy_aside_container">
+							<div class="energy_upper">
+								<div class="energy_val" id="energy_current">0</div>
+								<div>
+									<button class="energy_button" id="energy_plus_current" onclick="manageEnergy()">+</button>
+									<button class="energy_button" id="energy_minus_current" onclick="manageEnergy(1)">-</button>
+								</div>
+								<button id="energy_charge" onclick="manageEnergy(-1)">Charge</button>
+							</div>
+							<div class="energy_label">Available</div>
+						</div>
+
+						<div class="energy_aside_container">
+							<div class="energy_upper">
+								<div class="energy_val" id="energy_total">0</div>
+								<div>
+									<button class="energy_button" id="energy_plus_total" onclick="manageEnergy(2)">+</button>
+									<button class="energy_button" id="energy_minus_total" onclick="manageEnergy(3)">-</button>
+								</div>
+							</div>
+							<div class="energy_label">Total</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			<div id="brawl_hero_column">
+				<img class="brawl_cardimg" src="assets/cards/Hero.png">
+			</div>
+		</div>
+		<div class="brawl_row" id="brawl_bottom_row">
+			<div id="brawl_hand_column"></div>
+			<div id="brawl_character_column">
+				<div id="character1">
+					<div class="faction_container"><img class="brawl_faction" id="faction_1" src="assets/svg/BBP_AURELUS.svg"></div>
+					<img style="display: none;" class="brawl_cardimg brawl_character_3" src="assets/cards/BBPAC.png">
+					<img style="display: none;" class="brawl_cardimg brawl_character_2" src="assets/cards/BBPAC.png">
+					<img class="brawl_cardimg brawl_character_1" src="assets/cards/BBPCC-Dark.png">
+				</div>
+				<div id="character2">
+					<div class="faction_container"><img class="brawl_faction" id="faction_2" src="assets/svg/BBP_AURELUS.svg"></div>
+					<img style="display: none;" class="brawl_cardimg brawl_character_3" src="assets/cards/BBPAC.png">
+					<img style="display: none;" class="brawl_cardimg brawl_character_2" src="assets/cards/BBPAC.png">
+					<img class="brawl_cardimg brawl_character_1" src="assets/cards/BBPCC-Dark.png">
+				</div>
+				<div id="character3">
+					<div class="faction_container"><img class="brawl_faction" id="faction_3" src="assets/svg/BBP_DARKUS.svg"></div>
+					<img style="display: none;" class="brawl_cardimg brawl_character_3" src="assets/cards/BBPAC.png">
+					<img style="display: none;" class="brawl_cardimg brawl_character_2" src="assets/cards/BBPAC.png">
+					<img class="brawl_cardimg brawl_character_1" src="assets/cards/BBPCC-Dark.png">
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div id="menu_deck_options" style="display: none;">
+		<h1>Bakugan Deck Master</h1>
+		<!-- Button to go back to main menu -->
+		<button id="menu_deck_options_button_back" onclick="$('#menu_deck_options').hide(); $('#menu_main').show();">Back</button>
+		<!-- Display 20 deck buttons, when clicked open the deck builder with that deck id selected -->
+		<div id="deck_list">
+			<div id="deck_list_title">Deck List</div>
+			<div id="deck_list_buttons">
+				<button id="deck_list_button_1" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(1);">Deck 1</button>
+				<button id="deck_list_button_2" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(2);">Deck 2</button>
+				<button id="deck_list_button_3" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(3);">Deck 3</button>
+				<button id="deck_list_button_4" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(4);">Deck 4</button>
+				<button id="deck_list_button_5" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(5);">Deck 5</button>
+				<button id="deck_list_button_6" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(6);">Deck 6</button>
+				<button id="deck_list_button_7" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(7);">Deck 7</button>
+				<button id="deck_list_button_8" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(8);">Deck 8</button>
+				<button id="deck_list_button_9" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(9);">Deck 9</button>
+				<button id="deck_list_button_10" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(10);">Deck 10</button>
+				<button id="deck_list_button_11" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(11);">Deck 11</button>
+				<button id="deck_list_button_12" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(12);">Deck 12</button>
+				<button id="deck_list_button_13" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(13);">Deck 13</button>
+				<button id="deck_list_button_14" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(14);">Deck 14</button>
+				<button id="deck_list_button_15" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(15);">Deck 15</button>
+				<button id="deck_list_button_16" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(16);">Deck 16</button>
+				<button id="deck_list_button_17" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(17);">Deck 17</button>
+				<button id="deck_list_button_18" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(18);">Deck 18</button>
+				<button id="deck_list_button_19" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(19);">Deck 19</button>
+				<button id="deck_list_button_20" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(20);">Deck 20</button>
+			</div>
+		</div>
+	</div>
+	<div id="menu_deck_builder" style="display: none;">
+		<!-- Overlay that displays over the entire page showing an expanded image of the card -->
+		<div id="card_overlay" style="display: none;">
+			<!-- <div> -->
+				<img id="card_overlay_image" src="" alt="">
+			<!-- </div> -->
+			<div id="card_overlay_amount">Amount in Deck: 0</div>
+			<div id="card_overlay_buttons">
+				<button id="card_overlay_button_add">Add</button>
+				<button id="card_overlay_button_remove">Remove</button>
+			</div>
+		</div>
+		<!-- header bar -->
+		<div id="header_bar">
+			<div id="header_bar_title">Deck Builder</div>
+			<!-- Text box to rename current deck -->
+			<input type="text" id="header_bar_input" placeholder="Deck Name">
+			<!-- button to hide deck builder -->
+			<button id="header_bar_button_hide" onclick="$('#menu_deck_builder').hide(); $('#menu_deck_options').show();">Back</button>
+			<div id="header_bar_buttons">
+				<button id="header_bar_button_save">Save</button>
+				<button id="header_bar_button_load">Load</button>
+				<button id="header_bar_button_clear">Clear</button>
+				<button id="header_bar_button_delete">Delete</button>
+			</div>
+		</div>
+		<!-- Show cards currently added to the deck -->
+		<div id="builder_deck_list_title">Deck Total: 0</div>
+		<div id="builder_deck_list_cards"></div>
+		<!-- Search bar to search card names -->
+		<div id="search_bar">
+			<input type="text" id="search_bar_input" placeholder="Search...">
+			<!-- Checkbox to include all in search -->
+			<input type="checkbox" class="filtercheckbox" id="search_bar_checkbox" name="search_bar_checkbox" value="all">
+			<label for="search_bar_checkbox">Include all</label>
+		</div>
+		<!-- Check boxes to filter which bakugan factions should be shown and also filter by card type -->
+		<div id="filter_bar">
+			<div id="filter_bar_factions">
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_factions_checkbox_1" name="filter_bar_factions_checkbox_1" value="AQUOS">
+				<label for="filter_bar_factions_checkbox_1">Aquos</label>
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_factions_checkbox_2" name="filter_bar_factions_checkbox_2" value="AURELUS">
+				<label for="filter_bar_factions_checkbox_2">Aurelus</label>
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_factions_checkbox_3" name="filter_bar_factions_checkbox_3" value="DARKUS">
+				<label for="filter_bar_factions_checkbox_3">Darkus</label>
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_factions_checkbox_4" name="filter_bar_factions_checkbox_4" value="HAOS">
+				<label for="filter_bar_factions_checkbox_4">Haos</label>
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_factions_checkbox_5" name="filter_bar_factions_checkbox_5" value="PYRUS">
+				<label for="filter_bar_factions_checkbox_5">Pyrus</label>
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_factions_checkbox_6" name="filter_bar_factions_checkbox_6" value="VENTUS">
+				<label for="filter_bar_factions_checkbox_6">Ventus</label>
+			</div>
+			<div id="filter_bar_card_types">
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_types_checkbox_1" name="filter_bar_types_checkbox_1" value="ACTION">
+				<label for="filter_bar_types_checkbox_1">Action</label>
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_types_checkbox_2" name="filter_bar_types_checkbox_2" value="FLIP">
+				<label for="filter_bar_types_checkbox_2">Flip</label>
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_types_checkbox_3" name="filter_bar_types_checkbox_3" value="FLIP HERO">
+				<label for="filter_bar_types_checkbox_3">Flip Hero</label>
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_types_checkbox_4" name="filter_bar_types_checkbox_4" value="HERO">
+				<label for="filter_bar_types_checkbox_4">Hero</label>
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_types_checkbox_5" name="filter_bar_types_checkbox_5" value="BAKU-GEAR">
+				<label for="filter_bar_types_checkbox_5">Baku-Gear</label>
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_types_checkbox_6" name="filter_bar_types_checkbox_6" value="GEOGAN">
+				<label for="filter_bar_types_checkbox_6">Geogan</label>
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_types_checkbox_7" name="filter_bar_types_checkbox_7" value="EVO">
+				<label for="filter_bar_types_checkbox_7">Evo</label>
+			</div>
+			<!-- Check boxes to filter by set name -->
+			<div id="filter_bar_card_sets">
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_1" name="filter_bar_sets_checkbox_1" value="BB" checked>
+				<label for="filter_bar_sets_checkbox_1">Battle Brawlers</label>
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_2" name="filter_bar_sets_checkbox_2" value="BR" checked>
+				<label for="filter_bar_sets_checkbox_2">Bakugan Resurgence</label>
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_3" name="filter_bar_sets_checkbox_3" value="AA" checked>
+				<label for="filter_bar_sets_checkbox_3">Age of Aurelus</label>
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_4" name="filter_bar_sets_checkbox_4" value="AV" checked>
+				<label for="filter_bar_sets_checkbox_4">Armored Elite</label>
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_5" name="filter_bar_sets_checkbox_5" value="FF" checked>
+				<label for="filter_bar_sets_checkbox_5">Fusion Force</label>
+				<input style="display: none;" type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_6" name="filter_bar_sets_checkbox_6" value="SV" checked>
+				<label style="display: none;" for="filter_bar_sets_checkbox_6">Shields of Vestroia</label>
+				<input style="display: none;" type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_7" name="filter_bar_sets_checkbox_7" value="GG" checked>
+				<label style="display: none;" for="filter_bar_sets_checkbox_7">Geogan Rising</label>
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_8" name="filter_bar_sets_checkbox_8" value="EV" checked>
+				<label for="filter_bar_sets_checkbox_8">Evolutions</label>
+				<input style="display: none;" type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_9" name="filter_bar_sets_checkbox_9" value="EV2" checked>
+				<label style="display: none;" for="filter_bar_sets_checkbox_9">Evolutions 2</label>
+				<input style="display: none;" type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_10" name="filter_bar_sets_checkbox_10" value="Legends" checked>
+				<label style="display: none;" for="filter_bar_sets_checkbox_10">Legends</label>
+			</div>
+		</div>
+		<!-- Show list of all cards able to be put into the deck -->
+		<div id="card_list_cards"></div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script src="assets/scripts/generate_card_db.js"></script>
+	<script src="assets/scripts/db_classification.js"></script>
+	<script src="assets/scripts/deck_select.js"></script>
+	<script src="assets/scripts/validate_deck.js"></script>
+	<script src="assets/scripts/deckbuilder.js"></script>
+	<script src="assets/scripts/brawl_logic.js"></script>
+	<script src="assets/scripts/style_update.js"></script>
+</body>
+</html>
