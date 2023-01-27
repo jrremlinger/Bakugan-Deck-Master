@@ -114,21 +114,21 @@ body {
 	padding-top: 10px;
 }
 
-#card_overlay #card_overlay_buttons {
+/* #card_overlay #card_overlay_buttons { */
 	/* position: absolute;
 	top: 68%;
 	left: 50%;
 	transform: translate(-50%, -50%); */
-}
+/* } */
 
 .svgImg {
 	width: 40px;
 	padding: 3px;
 }
 
-#brawl_ui {
+/* #brawl_ui { */
 	/* height: 97vh; */
-}
+/* } */
 
 .brawl_row {
 	/* height: calc(100vh / 3); */
