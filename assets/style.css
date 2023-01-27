@@ -114,17 +114,13 @@ body {
 
 .brawl_row {
 	/* height: calc(100vh / 3); */
-	height: 30%;
-	overflow: auto; /* Show scrollbar when items overflow */
+	/* height: 30%; */
+	/* overflow: auto; */
 	display: flex;
 	justify-content: center;
 }
 
-.brawl_row2 {
-	/* height: calc(100vh / 3); */
-	height: 30%;
-	overflow: auto; /* Show scrollbar when items overflow */
-	display: flex;
+.row2 {
 	justify-content: space-between;
 }
 
@@ -144,7 +140,7 @@ body {
 }
 
 #brawl_hand_column {
-	width: 58%;
+	width: 50%;
 	display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -153,17 +149,17 @@ body {
 	padding-bottom: 10px;
 }
 
-#brawl_hand_column img {
+/* #brawl_hand_column img {
 	margin: auto 0;
-}
+} */
 
 #brawl_bottom_row  {
 	/* height: auto; */
-    position: fixed;
-    bottom: 0;
+    position: relative;
+    /* bottom: 0; */
     width: 100%;
-	height: 30%;
-	padding-bottom: 5px;;
+	/* height: 30%; */
+	/* padding-bottom: 5px;; */
 }
 
 #brawl_character_column {
@@ -175,7 +171,8 @@ body {
 
 .brawl_cardimg {
 	/* height: calc(75vh / 3); */
-	height: calc(80vh / 3);
+	/* height: calc(80vh / 3); */
+	height: 110px;
 	/* height: 110px; */
 	/* margin: auto 0; */
 	padding: 3px;
@@ -184,22 +181,23 @@ body {
 .brawl_character_1, 
 .brawl_character_2, 
 .brawl_character_3 {
-	height: calc(65vh / 3);
+	
+	height: 110px;
 }
 .brawl_character_2 {
 	position: absolute;
-    top: calc(11vh / 3);
+    top: 20px;
 	z-index: -1;
 }
 .brawl_character_3 {
 	position: absolute;
-    top: calc(22vh / 3);
+    top: 40px;
 	z-index: -2;
 }
 
 #brawl_deck_total {
     color: white;
-    font-size: 8.85vh;
+    font-size: 35px;
     font-weight: bold;
 	/* margin: 0 auto; */
 	/* height: 110px; */
@@ -259,7 +257,7 @@ body {
 
 .brawl_faction {
 	position: absolute;
-    width: calc(35vh / 3);
+    width: 58px;
     padding: 3px;
 }
 
