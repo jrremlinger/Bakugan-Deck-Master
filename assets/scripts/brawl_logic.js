@@ -1,6 +1,5 @@
 // Test deck immdeiately
-$(window).on("load", function() {
-	localStorage.setItem("deck_1", `
+localStorage.setItem("deck_1", `
 	[{"name":"Inferno Wings","set":"BB","rarity":"SR","setNumber":"99","faction":["PYRUS"],"type":"ACTION"},
 	{"name":"Inferno Wings","set":"BB","rarity":"SR","setNumber":"99","faction":["PYRUS"],"type":"ACTION"},
 	{"name":"Might of Cyndeus","set":"BB","rarity":"RA","setNumber":"104","faction":["PYRUS"],"type":"ACTION"},
@@ -42,7 +41,7 @@ $(window).on("load", function() {
 	{"name":"Ruinous Blade","set":"FF","rarity":"CO","setNumber":"49","faction":["PYRUS","DARKUS"],"type":"ACTION"},
 	{"name":"Ruinous Blade","set":"FF","rarity":"CO","setNumber":"49","faction":["PYRUS","DARKUS"],"type":"ACTION"}]`
 	);
-
+$(window).on("load", function() {
 	checkValidDecks();
 	tryDeck(0);
 });
