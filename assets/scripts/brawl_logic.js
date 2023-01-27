@@ -243,13 +243,7 @@ function createListeners() {
 		expandedCard = $(this).index("#brawl_hand_column > *");
 
 		setOverlayButtons(0);
-
-		$("#brawl_overlay_image").removeClass()
-		if (hand[expandedCard].type == "FLIP" || hand[expandedCard].type == "FLIP HERO") {
-			$("#brawl_overlay_image").addClass("overlay_flip");
-		} else {
-			$("#brawl_overlay_image").addClass("overlay_normal");
-		}
+		$("#brawl_overlay_image").removeClass("enemy_hero");
 
 		// Set the card overlay image to the card that was clicked without the /thumbnail/thumb_ part
 		$("#brawl_overlay_image").attr("src", buildCardPath(hand[expandedCard], true));
@@ -273,17 +267,9 @@ function createListeners() {
 		expandedCard = $(this).index("#brawl_hero_column > *");
 		setOverlayButtons(12);
 
-		$("#brawl_overlay_image").removeClass()
-		if (hand[expandedCard].type == "FLIP HERO") {
-			$("#brawl_overlay_image").addClass("overlay_flip");
-		} else {
-			$("#brawl_overlay_image").addClass("overlay_normal");
-		}
-
+		$("#brawl_overlay_image").removeClass("enemy_hero")
 		if (enemyHeros.includes(expandedCard))
 			$("#brawl_overlay_image").addClass("enemy_hero");
-		else
-			$("#brawl_overlay_image").removeClass("enemy_hero");
 			
 
 		$("#brawl_overlay_image").attr("src", buildCardPath(heros[expandedCard], true));
@@ -303,13 +289,7 @@ function createListeners() {
 	$(".batch_expandable").click(function() {
 		expandedCard = $(this).index("#brawl_batch > *");
 		setOverlayButtons(13);
-
-		$("#brawl_overlay_image").removeClass()
-		if (batch[expandedCard].type == "FLIP") {
-			$("#brawl_overlay_image").addClass("overlay_flip");
-		} else {
-			$("#brawl_overlay_image").addClass("overlay_normal");
-		}
+		$("#brawl_overlay_image").removeClass("enemy_hero");
 
 		$("#brawl_overlay_image").attr("src", buildCardPath(batch[expandedCard], true));
 		$("#brawl_overlay").show();
