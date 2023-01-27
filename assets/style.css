@@ -94,7 +94,7 @@ body {
 	left: 50%;
 	transform: translate(-50%, 0%);
 	/* max-width: 80%; */
-	max-height: 300px;
+	max-height: 60%;
 }
 
 #card_overlay #card_overlay_amount {
@@ -308,6 +308,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	overflow: auto;
 }
 
 
@@ -321,12 +322,12 @@ body {
 
 .overlay_normal {
 	/* max-height: 75%; */
-	max-height: 300px;
+	max-height: 60%;
 }
 
 .overlay_flip {
 	/* max-height: 55%; */
-	max-height: 225px;
+	max-height: 50%;
 }
 
 #brawl_overlay_buttons {
@@ -373,4 +374,9 @@ button {
 .enemy_hero {
 	border: 3px solid red;
 	padding: 0;
+}
+
+/* media query if less than 580 px */
+@media screen and (max-width: 580px) {
+
 }

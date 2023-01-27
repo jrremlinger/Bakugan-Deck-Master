@@ -1,0 +1,93 @@
+Character:
+	*Click to view (Only clickable if it has an evo or gear attached)
+		Menu: Display same character graphic as main screen. Show options based only on what is attached.
+			1. Expand
+				Show all attached cards separately
+				1. Back
+			2. Evo
+				Show larger image of evo (without gear)
+				1. Name
+				2. Destroy Evo
+				3. Return to Hand
+				4. Back
+			3. Baku-Gear
+				1. Name
+				2. Destroy Baku-Gear
+				3. Return to Hand
+				4. Back
+			4. Dual-Gear
+				1. Name
+				2. Destroy Dual-Gear
+				3. Return to Hand
+				4. Back
+
+Discard pile:
+	1. View all
+		Display total of discarded cards
+		Click any card for options
+			1. Use
+				*Cost Menu
+			2. Send to Hand
+			3. Send to Deck
+				1. Top of Deck
+				2. Bottom of Deck
+				3. Shuffle
+				4. Back
+			4. Energize
+				1. Energize Charged
+				2. Energize Uncharged
+				3. Back
+			5. Back
+		1. Energize All
+		2. Back
+	2. Top Card
+		1. Use
+			*Cost Menu
+		2. Send to Hand
+		3. Send to Deck
+			1. Top of Deck
+			2. Bottom of Deck
+			3. Shuffle
+			4. Back
+		4. Energize
+			1. Energize Charged
+			2. Energize Uncharged
+			3. Back
+		5. Back
+	3. Choose Random
+		Shuffle discard pile, select random card
+		1. Use
+			*Cost Menu
+		2. Send to Hand
+		3. Send to Deck
+			1. Top of Deck
+			2. Bottom of Deck
+			3. Shuffle
+			4. Back
+		4. Energize
+			1. Energize Charged
+			2. Energize Uncharged
+			3. Back
+		5. Back
+
+Deck (Brainstorming):
+	*Draw to hand (amount, maybe option for 1 or range)
+	*Send to discard (amount, maybe option for 1 or range. Should see each card before going to the next and have actions for it. Flip/fliphero!!). End if discard below 0
+	*Energize top card(s) (Charged, uncharged)
+	*View a certain amount of cards from top of deck and put them back (top, bottom, random)
+	*Send to batch
+	*Search deck and add card to hand, then shuffle
+	*Reveal top (options: play if nonflip/fliphero, draw, discard)
+	*Search top (X) cards of deck (options: play, reorder (top/bottom (manual order), shuffle, top/bottom (rand order)) non-exclusive!!)
+	*Draw to hand immediately after playing a flip
+
+Energy:
+	*Energized cards must be kept track of because they can be discarded and played from there.
+
+Misc:
+	*Hand privacy ability for revealing cards from hand/deck to opponent.
+	*Header button Reveal Hand to show a flex of all cards in hand.
+
+Hand: COMPLETE
+Hero: COMPLETE
+Batch: COMPLETE

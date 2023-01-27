@@ -364,7 +364,7 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<div style=\"display: flex; align-items: center;\">
 					<span style=\"color: white;\">Cost: </span>
-					<input type=\"number\" id=\"energy_cost\" min=\"0\" max=\"10\" value=\"0\">
+					<input type=\"number\" id=\"energy_cost\" min=\"0\" max="${parseInt($("#energy_current").html()) * 10}" value=\"0\">
 					<div style="white-space: nowrap; color: white;">(${$("#energy_current").html()} Available)</div>
 				</div>`
 			);
@@ -389,7 +389,7 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<div style=\"display: flex; align-items: center;\">
 					<span style=\"color: white;\">Cost: </span>
-					<input type=\"number\" id=\"energy_cost\" min=\"0\" max=\"10\" value=\"0\">
+					<input type=\"number\" id=\"energy_cost\" min=\"0\" max="${parseInt($("#energy_current").html()) * 10}" value=\"0\">
 					<div style="white-space: nowrap; color: white;">(${$("#energy_current").html()} Available)</div>
 				</div>`
 			);
@@ -423,15 +423,20 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<div style=\"display: flex; align-items: center;\">
 					<span style=\"color: white;\">Cost: </span>
-					<input type=\"number\" id=\"energy_cost\" min=\"0\" max=\"10\" value=\"0\">
+					<input type=\"number\" id=\"energy_cost\" min=\"0\" max="${parseInt($("#energy_current").html()) * 10}" value=\"0\">
 					<div style="white-space: nowrap; color: white;">(${$("#energy_current").html()} Available)</div>
 				</div>`
 			);
 
 			$("#brawl_overlay_buttons").append(`
 				<button onclick=\"gearFromHand(1, 0)\">Baku-Gear (${character1.gear1 ? character1.gear1.name : "Empty"})</button>
-				<button onclick=\"gearFromHand(1, 1)\">Dual-Gear (${character1.gear2 ? character1.gear2.name : "Empty"})</button>
 			`);
+
+			if (character1.gear1) {
+				$("#brawl_overlay_buttons").append(`
+					<button onclick=\"gearFromHand(1, 1)\">Dual-Gear (${character1.gear2 ? character1.gear2.name : "Empty"})</button>
+				`);
+			}
 
 			$("#brawl_overlay_buttons").append(`
 				<button onclick="setOverlayButtons(4)">Back</button>`
@@ -446,15 +451,20 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<div style=\"display: flex; align-items: center;\">
 					<span style=\"color: white;\">Cost: </span>
-					<input type=\"number\" id=\"energy_cost\" min=\"0\" max=\"10\" value=\"0\">
+					<input type=\"number\" id=\"energy_cost\" min=\"0\" max="${parseInt($("#energy_current").html()) * 10}" value=\"0\">
 					<div style="white-space: nowrap; color: white;">(${$("#energy_current").html()} Available)</div>
 				</div>`
 			);
 
 			$("#brawl_overlay_buttons").append(`
 				<button onclick=\"gearFromHand(2, 0)\">Baku-Gear (${character2.gear1 ? character2.gear1.name : "Empty"})</button>
-				<button onclick=\"gearFromHand(2, 1)\">Dual-Gear (${character2.gear2 ? character2.gear2.name : "Empty"})</button>
 			`);
+
+			if (character2.gear1) {
+				$("#brawl_overlay_buttons").append(`
+					<button onclick=\"gearFromHand(2, 1)\">Dual-Gear (${character2.gear2 ? character2.gear2.name : "Empty"})</button>
+				`);
+			}
 
 			$("#brawl_overlay_buttons").append(`
 				<button onclick="setOverlayButtons(4)">Back</button>`
@@ -469,15 +479,20 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<div style=\"display: flex; align-items: center;\">
 					<span style=\"color: white;\">Cost: </span>
-					<input type=\"number\" id=\"energy_cost\" min=\"0\" max=\"10\" value=\"0\">
+					<input type=\"number\" id=\"energy_cost\" min=\"0\" max="${parseInt($("#energy_current").html()) * 10}" value=\"0\">
 					<div style="white-space: nowrap; color: white;">(${$("#energy_current").html()} Available)</div>
 				</div>`
 			);
 
 			$("#brawl_overlay_buttons").append(`
 				<button onclick=\"gearFromHand(3, 0)\">Baku-Gear (${character3.gear1 ? character3.gear1.name : "Empty"})</button>
-				<button onclick=\"gearFromHand(3, 1)\">Dual-Gear (${character3.gear2 ? character3.gear2.name : "Empty"})</button>
 			`);
+
+			if (character3.gear1) {
+				$("#brawl_overlay_buttons").append(`
+					<button onclick=\"gearFromHand(3, 1)\">Dual-Gear (${character3.gear2 ? character3.gear2.name : "Empty"})</button>
+				`);
+			}
 
 			$("#brawl_overlay_buttons").append(`
 				<button onclick="setOverlayButtons(4)">Back</button>`
@@ -508,7 +523,7 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<div style=\"display: flex; align-items: center;\">
 					<span style=\"color: white;\">Cost: </span>
-					<input type=\"number\" id=\"energy_cost\" min=\"0\" max=\"10\" value=\"0\">
+					<input type=\"number\" id=\"energy_cost\" min=\"0\" max="${parseInt($("#energy_current").html()) * 10}" value=\"0\">
 					<div style="white-space: nowrap; color: white;">(${$("#energy_current").html()} Available)</div>
 				</div>`
 			);
@@ -530,7 +545,7 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<div style=\"display: flex; align-items: center;\">
 					<span style=\"color: white;\">Cost: </span>
-					<input type=\"number\" id=\"energy_cost\" min=\"0\" max=\"10\" value=\"0\">
+					<input type=\"number\" id=\"energy_cost\" min=\"0\" max="${parseInt($("#energy_current").html()) * 10}" value=\"0\">
 					<div style="white-space: nowrap; color: white;">(${$("#energy_current").html()} Available)</div>
 				</div>`
 			);
@@ -552,7 +567,7 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<div style=\"display: flex; align-items: center;\">
 					<span style=\"color: white;\">Cost: </span>
-					<input type=\"number\" id=\"energy_cost\" min=\"0\" max=\"10\" value=\"0\">
+					<input type=\"number\" id=\"energy_cost\" min=\"0\" max="${parseInt($("#energy_current").html()) * 10}" value=\"0\">
 					<div style="white-space: nowrap; color: white;">(${$("#energy_current").html()} Available)</div>
 				</div>`
 			);
@@ -581,7 +596,7 @@ function setOverlayButtons(x = 0) {
 				"<button onclick=\"setOverlayButtons(17)\">Energize</button>"
 			);
 			$("#brawl_overlay_buttons").append(
-				"<button onclick=\"discardHero()\">Discard</button>"
+				"<button onclick=\"discardHero()\">Destroy</button>"
 			);
 			break;
 		case 13: // Batch actions
@@ -601,8 +616,12 @@ function setOverlayButtons(x = 0) {
 		case 14: // Batch send deck
 			$("#brawl_overlay_buttons").append(
 				"<button onclick=\"deckFromBatch(1)\">Top of Deck</button>"
-			);$("#brawl_overlay_buttons").append(
+			);
+			$("#brawl_overlay_buttons").append(
 				"<button onclick=\"deckFromBatch()\">Bottom of Deck</button>"
+			);
+			$("#brawl_overlay_buttons").append(
+				"<button onclick=\"deckFromBatch(3)\">Shuffle</button>"
 			);
 			$("#brawl_overlay_buttons").append(`
 				<button onclick="setOverlayButtons(13)">Back</button>`
@@ -611,8 +630,12 @@ function setOverlayButtons(x = 0) {
 		case 15: // Hand send deck
 			$("#brawl_overlay_buttons").append(
 				"<button onclick=\"deckFromHand(1)\">Top of Deck</button>"
-			);$("#brawl_overlay_buttons").append(
+			);
+			$("#brawl_overlay_buttons").append(
 				"<button onclick=\"deckFromHand()\">Bottom of Deck</button>"
+			);
+			$("#brawl_overlay_buttons").append(
+				"<button onclick=\"deckFromHand(3)\">Shuffle</button>"
 			);
 			$("#brawl_overlay_buttons").append(`
 				<button onclick="setOverlayButtons(0)">Back</button>`
@@ -666,10 +689,14 @@ function handFromHero() {
 function deckFromBatch(pos) {
 	$("#brawl_overlay_buttons").children("button").prop("disabled", true);
 	// add card to deck
-	if (pos) {
+	if (pos == 1) {
 		activeDeck.deck.push(batch[expandedCard]);
-	} else {
+	} else if (!pos) {
 		activeDeck.deck.unshift(batch[expandedCard]);
+	} else {
+		// push card to deck then shuffle
+		activeDeck.deck.push(batch[expandedCard]);
+		shuffleDeck();
 	}
 
 	// remove card from batch
@@ -687,10 +714,14 @@ function deckFromBatch(pos) {
 function deckFromHand(pos) {
 	$("#brawl_overlay_buttons").children("button").prop("disabled", true);
 	// add card to deck
-	if (pos) {
+	if (pos == 1) {
 		activeDeck.deck.push(hand[expandedCard]);
-	} else {
+	} else if (!pos) {
 		activeDeck.deck.unshift(hand[expandedCard]);
+	} else {
+		// push card to deck then shuffle
+		activeDeck.deck.push(hand[expandedCard]);
+		shuffleDeck();
 	}
 
 	// remove card from hand
