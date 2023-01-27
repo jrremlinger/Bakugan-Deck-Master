@@ -376,18 +376,22 @@ button {
 	padding: 0;
 }
 
+#brawl_batch {
+	overflow: auto;
+}
+
 /* media query if less than 580 px */
 @media screen and (max-width: 580px) {
 	.row2 {
 		flex-direction: column;
 		align-items: center;
 	}
-	#brawl_deck_column, #brawl_hand_column, #brawl_character_column, #brawl_hero_column {
+	#brawl_batch, #brawl_deck_column, #brawl_hand_column, #brawl_character_column, #brawl_hero_column {
 		width: 100%;
 		justify-content: flex-start;
 		flex-direction: unset;
 	}
-	#brawl_hero_column, #brawl_character_column, #brawl_hand_column {
+	#brawl_character_column {
 		justify-content: center;
 	}
 	#brawl_energy {

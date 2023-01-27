@@ -51,7 +51,7 @@ $(window).on("load", function() {
 let hand = [];
 let batch = [];
 let heros = [];
-let enemyHeros = [1];
+let enemyHeros = [];
 let discard = [];
 let expandedCard = null;
 let character1 = null;
@@ -62,10 +62,11 @@ function brawlInit(x) {
 	// load a copy of activedeck
 	activeDeck = JSON.parse(JSON.stringify(x));
 
-	batch = [ card_db[97] ];
-	discard = [ card_db[202] ];
-	heros = [ card_db[202], card_db[203] ];
+	batch = [];
+	discard = [];
+	heros = [];
 	expandedCard = null;
+	enemyHeros = [];
 	
 	$("#energy_current").html("0");
 	$("#energy_total").html("0");
