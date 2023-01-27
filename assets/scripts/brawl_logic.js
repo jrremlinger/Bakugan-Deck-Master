@@ -245,7 +245,7 @@ function createListeners() {
 		setOverlayButtons(0);
 
 		$("#brawl_overlay_image").removeClass()
-		if (hand[expandedCard].type == "FLIP HERO") {
+		if (hand[expandedCard].type == "FLIP" || hand[expandedCard].type == "FLIP HERO") {
 			$("#brawl_overlay_image").addClass("overlay_flip");
 		} else {
 			$("#brawl_overlay_image").addClass("overlay_normal");
@@ -258,21 +258,11 @@ function createListeners() {
 		$("#brawl_overlay").show();
 		$("#brawl_overlay").css("opacity", 1);
 
-		$("#brawl_overlay_buttons").css("left", (window.innerWidth / 2) + "px");
-
-		// set location of overlay buttons to be 50% of the screen width + half of the width of the card_overlay
-		setTimeout(function() {
-			$("#brawl_overlay_buttons").css("left", (window.innerWidth / 2) + ($("#brawl_overlay_image").width() / 2) + ($("#brawl_overlay_buttons").width() / 2) + "px");
-			$("#brawl_overlay_buttons").css("opacity", 1);
-		}, 200);
-
 		// Add click function to close the overlay when the background is clicked
 		$("#brawl_overlay").click(function(event) {
 			if (event.target == this) {
 				$("#brawl_overlay").css("opacity", 0);
-				$("#brawl_overlay_buttons").css("opacity", 0);
 				setTimeout(function() {
-					$("#brawl_overlay_buttons").css("left", (window.innerWidth / 2) + "px");
 					$("#brawl_overlay").hide();
 				}, 200);
 			}
@@ -284,7 +274,7 @@ function createListeners() {
 		setOverlayButtons(12);
 
 		$("#brawl_overlay_image").removeClass()
-		if (hand[expandedCard].type == "FLIP") {
+		if (hand[expandedCard].type == "FLIP HERO") {
 			$("#brawl_overlay_image").addClass("overlay_flip");
 		} else {
 			$("#brawl_overlay_image").addClass("overlay_normal");
@@ -299,19 +289,11 @@ function createListeners() {
 		$("#brawl_overlay_image").attr("src", buildCardPath(heros[expandedCard], true));
 		$("#brawl_overlay").show();
 		$("#brawl_overlay").css("opacity", 1);
-		$("#brawl_overlay_buttons").css("left", (window.innerWidth / 2) + "px");
-
-		setTimeout(function() {
-			$("#brawl_overlay_buttons").css("left", (window.innerWidth / 2) + ($("#brawl_overlay_image").width() / 2) + ($("#brawl_overlay_buttons").width() / 2) + "px");
-			$("#brawl_overlay_buttons").css("opacity", 1);
-		}, 200);
 
 		$("#brawl_overlay").click(function(event) {
 			if (event.target == this) {
 				$("#brawl_overlay").css("opacity", 0);
-				$("#brawl_overlay_buttons").css("opacity", 0);
 				setTimeout(function() {
-					$("#brawl_overlay_buttons").css("left", (window.innerWidth / 2) + "px");
 					$("#brawl_overlay").hide();
 				}, 200);
 			}
@@ -332,19 +314,11 @@ function createListeners() {
 		$("#brawl_overlay_image").attr("src", buildCardPath(batch[expandedCard], true));
 		$("#brawl_overlay").show();
 		$("#brawl_overlay").css("opacity", 1);
-		$("#brawl_overlay_buttons").css("left", (window.innerWidth / 2) + "px");
-
-		setTimeout(function() {
-			$("#brawl_overlay_buttons").css("left", (window.innerWidth / 2) + ($("#brawl_overlay_image").width() / 2) + ($("#brawl_overlay_buttons").width() / 2) + "px");
-			$("#brawl_overlay_buttons").css("opacity", 1);
-		}, 200);
 
 		$("#brawl_overlay").click(function(event) {
 			if (event.target == this) {
 				$("#brawl_overlay").css("opacity", 0);
-				$("#brawl_overlay_buttons").css("opacity", 0);
 				setTimeout(function() {
-					$("#brawl_overlay_buttons").css("left", (window.innerWidth / 2) + "px");
 					$("#brawl_overlay").hide();
 				}, 200);
 			}
@@ -354,11 +328,6 @@ function createListeners() {
 
 function setOverlayButtons(x = 0) {
 	$("#brawl_overlay_buttons").empty();
-
-	// Set button locations
-	setTimeout(function() {
-		$("#brawl_overlay_buttons").css("left", (window.innerWidth / 2) + ($("#brawl_overlay_image").width() / 2) + ($("#brawl_overlay_buttons").width() / 2) + "px");
-	}, 10);
 
 	switch (x) {
 		case 0: // Card in hand
@@ -689,7 +658,6 @@ function handFromHero() {
 	// update UI
 	updateUI();
 	$("#brawl_overlay").css("opacity", 0);
-	$("#brawl_overlay_buttons").css("opacity", 0);
 	setTimeout(function() {
 		$("#brawl_overlay").hide();
 	}, 200);
@@ -711,7 +679,6 @@ function deckFromBatch(pos) {
 	updateUI();
 
 	$("#brawl_overlay").css("opacity", 0);
-	$("#brawl_overlay_buttons").css("opacity", 0);
 	setTimeout(function() {
 		$("#brawl_overlay").hide();
 	}, 200);
@@ -733,7 +700,6 @@ function deckFromHand(pos) {
 	updateUI();
 
 	$("#brawl_overlay").css("opacity", 0);
-	$("#brawl_overlay_buttons").css("opacity", 0);
 	setTimeout(function() {
 		$("#brawl_overlay").hide();
 	}, 200);
@@ -751,7 +717,6 @@ function handFromBatch() {
 	updateUI();
 
 	$("#brawl_overlay").css("opacity", 0);
-	$("#brawl_overlay_buttons").css("opacity", 0);
 	setTimeout(function() {
 		$("#brawl_overlay").hide();
 	}, 200);
@@ -769,7 +734,6 @@ function discardFromBatch() {
 	updateUI();
 
 	$("#brawl_overlay").css("opacity", 0);
-	$("#brawl_overlay_buttons").css("opacity", 0);
 	setTimeout(function() {
 		$("#brawl_overlay").hide();
 	}, 200);
@@ -790,7 +754,6 @@ function discardHero() {
 	updateUI();
 
 	$("#brawl_overlay").css("opacity", 0);
-	$("#brawl_overlay_buttons").css("opacity", 0);
 	setTimeout(function() {
 		$("#brawl_overlay").hide();
 	}, 200);
@@ -815,7 +778,6 @@ function gearFromHand(character, slot) {
 	updateUI();
 
 	$("#brawl_overlay").css("opacity", 0);
-	$("#brawl_overlay_buttons").css("opacity", 0);
 	setTimeout(function() {
 		$("#brawl_overlay").hide();
 	}, 200);
@@ -855,7 +817,6 @@ function evoFromHand(character) {
 	updateUI();
 
 	$("#brawl_overlay").css("opacity", 0);
-	$("#brawl_overlay_buttons").css("opacity", 0);
 	setTimeout(function() {
 		$("#brawl_overlay").hide();
 	}, 200);
@@ -875,7 +836,6 @@ function heroFromHand() {
 	manageEnergy(4, parseInt($("#energy_cost").val()));
 
 	$("#brawl_overlay").css("opacity", 0);
-	$("#brawl_overlay_buttons").css("opacity", 0);
 	setTimeout(function() {
 		$("#brawl_overlay").hide();
 	}, 200);
@@ -901,7 +861,6 @@ function discardFromHand() {
 	hand.splice(expandedCard, 1);
 
 	$("#brawl_overlay").css("opacity", 0);
-	$("#brawl_overlay_buttons").css("opacity", 0);
 	setTimeout(function() {
 		$("#brawl_overlay").hide();
 	}, 200);
@@ -920,7 +879,6 @@ function energizeFromHand(x) {
 	}
 
 	$("#brawl_overlay").css("opacity", 0);
-	$("#brawl_overlay_buttons").css("opacity", 0);
 	setTimeout(function() {
 		$("#brawl_overlay").hide();
 	}, 200);
@@ -942,7 +900,6 @@ function energizeFromHero(x) {
 	}
 
 	$("#brawl_overlay").css("opacity", 0);
-	$("#brawl_overlay_buttons").css("opacity", 0);
 	setTimeout(function() {
 		$("#brawl_overlay").hide();
 	}, 200);
@@ -968,7 +925,6 @@ function energizeFromBatch(x) {
 	}
 
 	$("#brawl_overlay").css("opacity", 0);
-	$("#brawl_overlay_buttons").css("opacity", 0);
 	setTimeout(function() {
 		$("#brawl_overlay").hide();
 	}, 200);
@@ -988,7 +944,6 @@ function actionFromHand() {
 	manageEnergy(4, parseInt($("#energy_cost").val()));
 	
 	$("#brawl_overlay").css("opacity", 0);
-	$("#brawl_overlay_buttons").css("opacity", 0);
 	setTimeout(function() {
 		$("#brawl_overlay").hide();
 	}, 200);

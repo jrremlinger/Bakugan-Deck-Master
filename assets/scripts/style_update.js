@@ -11,6 +11,6 @@ window.addEventListener("resize", function () {
 // 	$(".faction_container").css("top", $(".brawl_character_1").height() / 4.3 + "px");
 
 	// set location of overlay buttons to be 50% of the screen width + half of the width of the card_overlay
-	$("#brawl_overlay_buttons").css("left", (window.innerWidth / 2) + ($("#brawl_overlay_image").width() / 2) + ($("#brawl_overlay_buttons").width() / 2) + "px");
+	// $("#brawl_overlay_buttons").css("left", (window.innerWidth / 2) + ($("#brawl_overlay_image").width() / 2) + ($("#brawl_overlay_buttons").width() / 2) + "px");
 });
 
