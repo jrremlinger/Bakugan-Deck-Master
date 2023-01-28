@@ -333,8 +333,9 @@ function setOverlayButtons(x = 0) {
 			break;
 		case 2: // Energize card in hand
 			$("#brawl_overlay_buttons").append(`
-			<button onclick=\"energizeFromHand(1)\">Energize\nCharged</button>
-			<button onclick=\"energizeFromHand(0)\">Energize\nUncharged</button>`
+				<button onclick=\"energizeFromHand(1)\">Energize\nCharged</button>
+				<button onclick=\"energizeFromHand(0)\">Energize\nUncharged</button>
+				<button onclick=\"setOverlayButtons(0)\">Back</button>`
 			);
 			break;
 		case 3: // Play hero from hand
@@ -596,13 +597,15 @@ function setOverlayButtons(x = 0) {
 		case 16: // Energize card from batch
 			$("#brawl_overlay_buttons").append(`
 				<button onclick=\"energizeFromBatch(1)\">Energize\nCharged</button>
-				<button onclick=\"energizeFromBatch(0)\">Energize\nUncharged</button>`
+				<button onclick=\"energizeFromBatch(0)\">Energize\nUncharged</button>
+				<button onclick=\"setOverlayButtons(13)\">Back</button>`
 			);
 			break;
 		case 17: // Energize card from hero
 			$("#brawl_overlay_buttons").append(`
 				<button onclick=\"energizeFromHero(1)\">Energize\nCharged</button>
-				<button onclick=\"energizeFromHero(0)\">Energize\nUncharged</button>`
+				<button onclick=\"energizeFromHero(0)\">Energize\nUncharged</button>
+				<button onclick=\"setOverlayButtons(12)\">Back</button>`
 			);
 			break;
 		case 18: // Character evo menu
@@ -1125,6 +1128,8 @@ function characterOverlay(character = 0) {
 function discardOverlay() {
 	if (discard.length > 0) {
 		expandedCard = discard[discard.length - 1];
+		$("#brawl_overlay_image").attr("src", buildCardPath(expandedCard, true));
+		setOverlayButtons(-1);
 
 		$("#brawl_overlay").show();
 		$("#brawl_overlay").css("opacity", 1);
