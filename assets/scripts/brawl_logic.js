@@ -75,7 +75,7 @@ function brawlInit(x) {
 	shuffleDeck();
 
 	hand = activeDeck.deck.slice(0, 6);
-	hand.push(card_db[263], card_db[264], card_db[265], card_db[202], card_db[203], card_db[204], card_db[876], card_db[877], card_db[878]);
+	// hand.push(card_db[263], card_db[264], card_db[265], card_db[202], card_db[203], card_db[204], card_db[876], card_db[877], card_db[878]);
 
 	//  remove cards from deck
 	activeDeck.deck.splice(0, 6);
