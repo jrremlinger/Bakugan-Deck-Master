@@ -189,6 +189,8 @@ function updateDeckList() {
 			// Use different ID for flip cards
 			if (deck[i].type == "FLIP") 
 				amountLocationDiv = "<div class=\"builder_deck_list_card_amount_flip\">"
+			else if (deck[i].type == "BAKU-GEAR") 
+				amountLocationDiv = "<div class=\"builder_deck_list_card_amount_gear\">"
 			else 
 				amountLocationDiv = "<div class=\"builder_deck_list_card_amount\">";
 

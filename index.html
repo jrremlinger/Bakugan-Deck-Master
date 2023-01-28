@@ -26,6 +26,11 @@
 	<div id="brawl_ui">
 		<div id="brawl_overlay" style="display: none;">
 			<img id="brawl_overlay_image" src="" alt="">
+			<div id="character_container" style="display: none;">
+				<img class="overlay_cc" id="cc_evo" onclick="setOverlayButtons(18)" src="assets/cards/BBPCC-Dark.png" />
+				<img class="overlay_cc" id="cc_gear1" onclick="setOverlayButtons(19)" src="assets/cards/BBPAC.png" />
+				<img class="overlay_cc" id="cc_gear2" onclick="setOverlayButtons(20)" src="assets/cards/BBPAC.png" />
+			</div>
 			<div  id="brawl_overlay_buttons"></div>
 		</div>
 		<div id="brawl_header">
@@ -45,7 +50,7 @@
 			<div id="brawl_deck_column">
 				<div id="brawl_deck_total">40</div>
 				<img class="brawl_cardimg" id="brawl_deck" src="assets/cards/BBPAC-Dark.png">
-				<img class="brawl_cardimg" id="brawl_discard" src="assets/cards/Discard.png">
+				<img class="brawl_cardimg" id="brawl_discard" onclick="discardOverlay()" src="assets/cards/Discard.png">
 				<div id="brawl_energy">
 					<div id="energy_title">Energy</div>
 					<div id="energy_container">
@@ -82,19 +87,19 @@
 		<div class="brawl_row row2" id="brawl_bottom_row">
 			<div id="brawl_hand_column"></div>
 			<div id="brawl_character_column">
-				<div id="character1">
+				<div id="character1" onclick="characterOverlay()">
 					<div class="faction_container"><img class="brawl_faction" id="faction_1" src="assets/svg/BBP_AURELUS.svg"></div>
 					<img style="display: none;" class="brawl_cardimg brawl_character_3" src="assets/cards/BBPAC.png">
 					<img style="display: none;" class="brawl_cardimg brawl_character_2" src="assets/cards/BBPAC.png">
 					<img class="brawl_cardimg brawl_character_1" src="assets/cards/BBPCC-Dark.png">
 				</div>
-				<div id="character2">
+				<div id="character2" onclick="characterOverlay(1)">
 					<div class="faction_container"><img class="brawl_faction" id="faction_2" src="assets/svg/BBP_AURELUS.svg"></div>
 					<img style="display: none;" class="brawl_cardimg brawl_character_3" src="assets/cards/BBPAC.png">
 					<img style="display: none;" class="brawl_cardimg brawl_character_2" src="assets/cards/BBPAC.png">
 					<img class="brawl_cardimg brawl_character_1" src="assets/cards/BBPCC-Dark.png">
 				</div>
-				<div id="character3">
+				<div id="character3" onclick="characterOverlay(2)">
 					<div class="faction_container"><img class="brawl_faction" id="faction_3" src="assets/svg/BBP_DARKUS.svg"></div>
 					<img style="display: none;" class="brawl_cardimg brawl_character_3" src="assets/cards/BBPAC.png">
 					<img style="display: none;" class="brawl_cardimg brawl_character_2" src="assets/cards/BBPAC.png">

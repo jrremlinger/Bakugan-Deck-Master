@@ -1,25 +1,5 @@
-Character:
-	*Click to view (Only clickable if it has an evo or gear attached)
-		Menu: Display same character graphic as main screen. Show options based only on what is attached.
-			1. Expand
-				Show all attached cards separately
-				1. Back
-			2. Evo
-				Show larger image of evo (without gear)
-				1. Name
-				2. Destroy Evo
-				3. Return to Hand
-				4. Back
-			3. Baku-Gear
-				1. Name
-				2. Destroy Baku-Gear
-				3. Return to Hand
-				4. Back
-			4. Dual-Gear
-				1. Name
-				2. Destroy Dual-Gear
-				3. Return to Hand
-				4. Back
+BRAINSTORM FURTHER BEFORE ACTION.
+THINK OF WHAT CAN BE INCLUDED ONLY IN THE DECK DAMAGE MENU
 
 Discard pile:
 	1. View all
@@ -77,7 +57,7 @@ Deck (Brainstorming):
 	*View a certain amount of cards from top of deck and put them back (top, bottom, random)
 	*Send to batch
 	*Search deck and add card to hand, then shuffle
-	*Reveal top (options: play if nonflip/fliphero, draw, discard)
+	*Reveal top (options: play if nonflip/fliphero, draw, discard, return to top, buttom, shuffle)
 	*Search top (X) cards of deck (options: play, reorder (top/bottom (manual order), shuffle, top/bottom (rand order)) non-exclusive!!)
 	*Draw to hand immediately after playing a flip
 
@@ -87,7 +67,9 @@ Energy:
 Misc:
 	*Hand privacy ability for revealing cards from hand/deck to opponent.
 	*Header button Reveal Hand to show a flex of all cards in hand.
+	*Refactor code, way too many functions that can be consolidated 
 
 Hand: COMPLETE
 Hero: COMPLETE
 Batch: COMPLETE
+Characters: COMPLETE

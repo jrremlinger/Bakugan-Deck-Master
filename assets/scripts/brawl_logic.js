@@ -40,7 +40,8 @@ localStorage.setItem("deck_1", `
 	{"name":"Ruinous Blade","set":"FF","rarity":"CO","setNumber":"49","faction":["PYRUS","DARKUS"],"type":"ACTION"},
 	{"name":"Ruinous Blade","set":"FF","rarity":"CO","setNumber":"49","faction":["PYRUS","DARKUS"],"type":"ACTION"},
 	{"name":"Ruinous Blade","set":"FF","rarity":"CO","setNumber":"49","faction":["PYRUS","DARKUS"],"type":"ACTION"}]`
-	);
+);
+
 $(window).on("load", function() {
 	checkValidDecks();
 	tryDeck(0);
@@ -54,9 +55,8 @@ let heros = [];
 let enemyHeros = [];
 let discard = [];
 let expandedCard = null;
-let character1 = null;
-let character2 = null;
-let character3 = null;
+let expandedCharacter = null;
+let characters = [];
 
 function brawlInit(x) {
 	// load a copy of activedeck
@@ -66,6 +66,7 @@ function brawlInit(x) {
 	discard = [];
 	heros = [];
 	expandedCard = null;
+	expandedCharacter = null;
 	enemyHeros = [];
 	
 	$("#energy_current").html("0");
@@ -74,34 +75,37 @@ function brawlInit(x) {
 	shuffleDeck();
 
 	hand = activeDeck.deck.slice(0, 6);
+	hand.push(card_db[263], card_db[264], card_db[265], card_db[202], card_db[203], card_db[204], card_db[876], card_db[877], card_db[878]);
 
 	//  remove cards from deck
 	activeDeck.deck.splice(0, 6);
 
 	// Character setup
-	character1 = {
-		"faction": factionFlatten(activeDeck)[0],
-		"evo": null,
-		"gear1": card_db[868],
-		"gear2": card_db[869],
-	};
-	character2 = {
-		"faction": factionFlatten(activeDeck)[1],
-		"evo": card_db[240],
-		"gear1": card_db[869],
-		"gear2": null,
-	};
-	character3 = {
-		"faction": factionFlatten(activeDeck)[2],
-		"evo": null,
-		"gear1": null,
-		"gear2": null,
-	};
+	characters = [
+		{
+			"faction": factionFlatten(activeDeck)[0],
+			"evo": null,
+			"gear1": null,
+			"gear2": null,
+		},
+		{
+			"faction": factionFlatten(activeDeck)[1],
+			"evo": null,
+			"gear1": null,
+			"gear2": null,
+		},
+		{
+			"faction": factionFlatten(activeDeck)[2],
+			"evo": null,
+			"gear1": null,
+			"gear2": null,
+		},
+	];
 
 	// Set character faction icons
-	$("#faction_1").attr("src", "assets/svg/BBP_" + character1.faction + ".svg");
-	$("#faction_2").attr("src", "assets/svg/BBP_" + character2.faction + ".svg");
-	$("#faction_3").attr("src", "assets/svg/BBP_" + character3.faction + ".svg");
+	$("#faction_1").attr("src", "assets/svg/BBP_" + characters[0].faction + ".svg");
+	$("#faction_2").attr("src", "assets/svg/BBP_" + characters[1].faction + ".svg");
+	$("#faction_3").attr("src", "assets/svg/BBP_" + characters[2].faction + ".svg");
 
 	updateUI();
 }
@@ -173,60 +177,36 @@ function updateUI() {
 		);
 	}
 
-	// Update baku-gear
-	if (character1.gear1 == null)
-		$("#character1 .brawl_character_2").hide();
-	else {
-		$("#character1 .brawl_character_2").show();
-		$("#character1 .brawl_character_2").attr("src", buildCardPath(character1.gear1));
-	} if (character1.gear2 == null)
-		$("#character1 .brawl_character_3").hide();
-	else {
-		$("#character1 .brawl_character_3").show();
-		$("#character1 .brawl_character_3").attr("src", buildCardPath(character1.gear2));
-	} if (character2.gear1 == null)
-		$("#character2 .brawl_character_2").hide();
-	else {
-		$("#character2 .brawl_character_2").show();
-		$("#character2 .brawl_character_2").attr("src", buildCardPath(character2.gear1));
-	} if (character2.gear2 == null)
-		$("#character2 .brawl_character_3").hide();
-	else {
-		$("#character2 .brawl_character_3").show();
-		$("#character2 .brawl_character_3").attr("src", buildCardPath(character2.gear2));
-	} if (character3.gear1 == null)
-		$("#character3 .brawl_character_2").hide();
-	else {
-		$("#character3 .brawl_character_2").show();
-		$("#character3 .brawl_character_2").attr("src", buildCardPath(character3.gear1));
-	} if (character3.gear2 == null)
-		$("#character3 .brawl_character_3").hide();
-	else {
-		$("#character3 .brawl_character_3").show();
-		$("#character3 .brawl_character_3").attr("src", buildCardPath(character3.gear2));
+	// if character gear 2 is not empty, but gear 1 is, swap them
+	for(let i = 0; i < characters.length; i++) {
+		if (characters[i].gear2 != null && characters[i].gear1 == null) {
+			characters[i].gear1 = characters[i].gear2;
+			characters[i].gear2 = null;
+		}
 	}
 
-	// Update character evos
-	if (character1.evo == null) {
-		$("#character1 .brawl_character_1").attr("src", "assets/cards/BBPCC-Dark.png");
-		$("#character1 .faction_container").show();
-	} else {
-		$("#character1 .brawl_character_1").attr("src", buildCardPath(character1.evo));
-		$("#character1 .faction_container").hide();
-	} if (character2.evo == null) {
-		$("#character2 .brawl_character_1").attr("src", "assets/cards/BBPCC-Dark.png");
-		$("#character2 .faction_container").show();
-	} else {
-		$("#character2 .brawl_character_1").attr("src", buildCardPath(character2.evo));
-		$("#character2 .faction_container").hide();
-	} if (character3.evo == null) {
-		$("#character3 .brawl_character_1").attr("src", "assets/cards/BBPCC-Dark.png");
-		$("#character3 .faction_container").show();
-	} else {
-		$("#character3 .brawl_character_1").attr("src", buildCardPath(character3.evo));
-		$("#character3 .faction_container").hide();
+	// Update characters
+	for(let i = 0; i < characters.length; i++) {
+		if (characters[i].evo == null) {
+			$(`#character${i+1} .brawl_character_1`).attr("src", "assets/cards/BBPCC-Dark.png");
+			$(`#character${i+1} .faction_container`).show();
+		} else {
+			$(`#character${i+1} .brawl_character_1`).attr("src", buildCardPath(characters[i].evo));
+			$(`#character${i+1} .faction_container`).hide();
+		}
+		if (characters[i].gear1 == null)
+			$(`#character${i+1} .brawl_character_2`).hide();
+		else {
+			$(`#character${i+1} .brawl_character_2`).show();
+			$(`#character${i+1} .brawl_character_2`).attr("src", buildCardPath(characters[i].gear1));
+		}
+		if (characters[i].gear2 == null)
+			$(`#character${i+1} .brawl_character_3`).hide();
+		else {
+			$(`#character${i+1} .brawl_character_3`).show();
+			$(`#character${i+1} .brawl_character_3`).attr("src", buildCardPath(characters[i].gear2));
+		}
 	}
-
 
 	// Make discard pile show highest index of discard array
 	if (discard.length > 0)
@@ -256,10 +236,7 @@ function createListeners() {
 		// Add click function to close the overlay when the background is clicked
 		$("#brawl_overlay").click(function(event) {
 			if (event.target == this) {
-				$("#brawl_overlay").css("opacity", 0);
-				setTimeout(function() {
-					$("#brawl_overlay").hide();
-				}, 200);
+				hideOverlay()
 			}
 		});
 	});
@@ -279,10 +256,7 @@ function createListeners() {
 
 		$("#brawl_overlay").click(function(event) {
 			if (event.target == this) {
-				$("#brawl_overlay").css("opacity", 0);
-				setTimeout(function() {
-					$("#brawl_overlay").hide();
-				}, 200);
+				hideOverlay()
 			}
 		});
 	});
@@ -298,10 +272,7 @@ function createListeners() {
 
 		$("#brawl_overlay").click(function(event) {
 			if (event.target == this) {
-				$("#brawl_overlay").css("opacity", 0);
-				setTimeout(function() {
-					$("#brawl_overlay").hide();
-				}, 200);
+				hideOverlay()
 			}
 		});
 	});
@@ -391,9 +362,9 @@ function setOverlayButtons(x = 0) {
 			);
 
 			$("#brawl_overlay_buttons").append(`
-				<button onclick="setOverlayButtons(5);">Character 1 <img style="height: 20px;" src="assets/svg/BBP_${character1.faction}.svg" /></button>
-				<button onclick="setOverlayButtons(6);">Character 2 <img style="height: 20px;" src="assets/svg/BBP_${character2.faction}.svg" /></button>
-				<button onclick="setOverlayButtons(7);">Character 3 <img style="height: 20px;" src="assets/svg/BBP_${character3.faction}.svg" /></button>
+				<button onclick="setOverlayButtons(5);">Character 1 <img style="height: 20px;" src="assets/svg/BBP_${characters[0].faction}.svg" /></button>
+				<button onclick="setOverlayButtons(6);">Character 2 <img style="height: 20px;" src="assets/svg/BBP_${characters[1].faction}.svg" /></button>
+				<button onclick="setOverlayButtons(7);">Character 3 <img style="height: 20px;" src="assets/svg/BBP_${characters[2].faction}.svg" /></button>
 			`);
 
 			$("#brawl_overlay_buttons").append(`
@@ -410,12 +381,12 @@ function setOverlayButtons(x = 0) {
 			);
 
 			$("#brawl_overlay_buttons").append(`
-				<button onclick=\"gearFromHand(1, 0)\">Baku-Gear (${character1.gear1 ? character1.gear1.name : "Empty"})</button>
+				<button onclick=\"gearFromHand(0, 0)\">Baku-Gear (${characters[0].gear1 ? characters[0].gear1.name : "Empty"})</button>
 			`);
 
-			if (character1.gear1) {
+			if (characters[0].gear1) {
 				$("#brawl_overlay_buttons").append(`
-					<button onclick=\"gearFromHand(1, 1)\">Dual-Gear (${character1.gear2 ? character1.gear2.name : "Empty"})</button>
+					<button onclick=\"gearFromHand(0, 1)\">Dual-Gear (${characters[0].gear2 ? characters[0].gear2.name : "Empty"})</button>
 				`);
 			}
 
@@ -438,12 +409,12 @@ function setOverlayButtons(x = 0) {
 			);
 
 			$("#brawl_overlay_buttons").append(`
-				<button onclick=\"gearFromHand(2, 0)\">Baku-Gear (${character2.gear1 ? character2.gear1.name : "Empty"})</button>
+				<button onclick=\"gearFromHand(1, 0)\">Baku-Gear (${characters[1].gear1 ? characters[1].gear1.name : "Empty"})</button>
 			`);
 
-			if (character2.gear1) {
+			if (characters[1].gear1) {
 				$("#brawl_overlay_buttons").append(`
-					<button onclick=\"gearFromHand(2, 1)\">Dual-Gear (${character2.gear2 ? character2.gear2.name : "Empty"})</button>
+					<button onclick=\"gearFromHand(1, 1)\">Dual-Gear (${characters[1].gear2 ? characters[1].gear2.name : "Empty"})</button>
 				`);
 			}
 
@@ -466,12 +437,12 @@ function setOverlayButtons(x = 0) {
 			);
 
 			$("#brawl_overlay_buttons").append(`
-				<button onclick=\"gearFromHand(3, 0)\">Baku-Gear (${character3.gear1 ? character3.gear1.name : "Empty"})</button>
+				<button onclick=\"gearFromHand(2, 0)\">Baku-Gear (${characters[2].gear1 ? characters[2].gear1.name : "Empty"})</button>
 			`);
 
-			if (character3.gear1) {
+			if (characters[2].gear1) {
 				$("#brawl_overlay_buttons").append(`
-					<button onclick=\"gearFromHand(3, 1)\">Dual-Gear (${character3.gear2 ? character3.gear2.name : "Empty"})</button>
+					<button onclick=\"gearFromHand(2, 1)\">Dual-Gear (${characters[2].gear2 ? characters[2].gear2.name : "Empty"})</button>
 				`);
 			}
 
@@ -489,12 +460,12 @@ function setOverlayButtons(x = 0) {
 				<div style="display: flex; align-items: center; color: white;">Choose a valid Character: </div>`
 			);
 
-			if (character1.faction == hand[expandedCard].faction) 
-				$("#brawl_overlay_buttons").append(`<button onclick="setOverlayButtons(9);">Character 1 <img style="height: 20px;" src="assets/svg/BBP_${character1.faction}.svg" /></button>`);
-			else if (character2.faction == hand[expandedCard].faction)
-				$("#brawl_overlay_buttons").append(`<button onclick="setOverlayButtons(10);">Character 2 <img style="height: 20px;" src="assets/svg/BBP_${character2.faction}.svg" /></button>`);
-			else if (character3.faction == hand[expandedCard].faction)
-				$("#brawl_overlay_buttons").append(`<button onclick="setOverlayButtons(11);">Character 3 <img style="height: 20px;" src="assets/svg/BBP_${character3.faction}.svg" /></button>`);
+			if (characters[0].faction == hand[expandedCard].faction) 
+				$("#brawl_overlay_buttons").append(`<button onclick="setOverlayButtons(9);">Character 1 <img style="height: 20px;" src="assets/svg/BBP_${characters[0].faction}.svg" /></button>`);
+			else if (characters[1].faction == hand[expandedCard].faction)
+				$("#brawl_overlay_buttons").append(`<button onclick="setOverlayButtons(10);">Character 2 <img style="height: 20px;" src="assets/svg/BBP_${characters[1].faction}.svg" /></button>`);
+			else if (characters[2].faction == hand[expandedCard].faction)
+				$("#brawl_overlay_buttons").append(`<button onclick="setOverlayButtons(11);">Character 3 <img style="height: 20px;" src="assets/svg/BBP_${characters[2].faction}.svg" /></button>`);
 
 			$("#brawl_overlay_buttons").append(`
 				<button onclick="setOverlayButtons(0)">Back</button>`
@@ -510,7 +481,7 @@ function setOverlayButtons(x = 0) {
 			);
 
 			$("#brawl_overlay_buttons").append(`
-				<button onclick=\"evoFromHand(1)\">Evolve (${character1.evo ? character1.evo.name.replace(/\(.*/, "").trim() : "Empty"})</button>
+				<button onclick=\"evoFromHand(0)\">Evolve (${characters[0].evo ? characters[0].evo.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 			`);
 
 			$("#brawl_overlay_buttons").append(`
@@ -532,7 +503,7 @@ function setOverlayButtons(x = 0) {
 			);
 
 			$("#brawl_overlay_buttons").append(`
-				<button onclick=\"evoFromHand(2)\">Evolve (${character2.evo ? character2.evo.name.replace(/\(.*/, "").trim() : "Empty"})</button>
+				<button onclick=\"evoFromHand(1)\">Evolve (${characters[1].evo ? characters[1].evo.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 			`);
 
 			$("#brawl_overlay_buttons").append(`
@@ -554,7 +525,7 @@ function setOverlayButtons(x = 0) {
 			);
 
 			$("#brawl_overlay_buttons").append(`
-				<button onclick=\"evoFromHand(3)\">Evolve (${character3.evo ? character3.evo.name.replace(/\(.*/, "").trim() : "Empty"})</button>
+				<button onclick=\"evoFromHand(2)\">Evolve (${characters[2].evo ? characters[2].evo.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 			`);
 
 			$("#brawl_overlay_buttons").append(`
@@ -634,7 +605,64 @@ function setOverlayButtons(x = 0) {
 				<button onclick=\"energizeFromHero(0)\">Energize\nUncharged</button>`
 			);
 			break;
+		case 18: // Character evo menu
+			$("#brawl_overlay_buttons").append(`
+				<div style="color: white;">${characters[expandedCharacter].evo.name.replace(/\(.*/, "").trim()}</div>
+				<button onclick=\"handFromCharacter()\">Send to Hand</button>
+				<button onclick=\"discardFromCharacter()\">Destroy Evo</button>
+			`);
+			break;
+		case 19: // Character gear menu
+			$("#brawl_overlay_buttons").append(`
+				<div style="color: white;">${characters[expandedCharacter].gear1.name.replace(/\(.*/, "").trim()}</div>
+				<button onclick=\"handFromCharacter(1)\">Send to Hand</button>
+				<button onclick=\"discardFromCharacter(1)\">Destroy Baku-Gear</button>
+			`);
+			break;
+		case 20: // Character dual-gear menu
+			$("#brawl_overlay_buttons").append(`
+				<div style="color: white;">${characters[expandedCharacter].gear2.name.replace(/\(.*/, "").trim()}</div>
+				<button onclick=\"handFromCharacter(2)\">Send to Hand</button>
+				<button onclick=\"discardFromCharacter(2)\">Destroy Dual-Gear</button>
+			`);
+			break;
 	}
+}
+
+function discardFromCharacter(x = 0) {
+	$("#brawl_overlay_buttons").children("button").prop("disabled", true);
+
+	if (x == 0) {
+		discard.push(characters[expandedCharacter].evo);
+		characters[expandedCharacter].evo = null;
+	} else if (x == 1) {
+		discard.push(characters[expandedCharacter].gear1);
+		characters[expandedCharacter].gear1 = null;
+	} else if (x == 2) {
+		discard.push(characters[expandedCharacter].gear2);
+		characters[expandedCharacter].gear2 = null;
+	}
+
+	updateUI();
+	hideOverlay();
+}
+
+function handFromCharacter(x = 0) {
+	$("#brawl_overlay_buttons").children("button").prop("disabled", true);
+
+	if (x == 0) {
+		hand.push(characters[expandedCharacter].evo);
+		characters[expandedCharacter].evo = null;
+	} else if (x == 1) {
+		hand.push(characters[expandedCharacter].gear1);
+		characters[expandedCharacter].gear1 = null;
+	} else if (x == 2) {
+		hand.push(characters[expandedCharacter].gear2);
+		characters[expandedCharacter].gear2 = null;
+	}
+
+	updateUI();
+	hideOverlay();
 }
 
 function toggleControl() {
@@ -775,13 +803,7 @@ function gearFromHand(character, slot) {
 	$("#brawl_overlay_buttons").children("button").prop("disabled", true);
 	manageEnergy(4, parseInt($("#energy_cost").val()));
 
-	if (character == 1)
-		addGear(character1, slot, hand[expandedCard]);
-	else if (character == 2)
-		addGear(character2, slot, hand[expandedCard]);
-	else if (character == 3)
-		addGear(character3, slot, hand[expandedCard]);
-	
+	addGear(characters[character], slot, hand[expandedCard]);
 
 	// remove card from hand
 	hand.splice(expandedCard, 1);
@@ -815,12 +837,7 @@ function evoFromHand(character) {
 	$("#brawl_overlay_buttons").children("button").prop("disabled", true);
 	manageEnergy(4, parseInt($("#energy_cost").val()));
 	
-	if (character == 1)
-		addEvo(character1, hand[expandedCard]);
-	else if (character == 2)
-		addEvo(character2, hand[expandedCard]);
-	else if (character == 3)
-		addEvo(character3, hand[expandedCard]);
+	addEvo(characters[character], hand[expandedCard]);
 
 	// remove card from hand
 	hand.splice(expandedCard, 1);
@@ -1070,4 +1087,61 @@ function clearBatch() {
 
 	// update UI
 	updateUI();
+}
+
+function characterOverlay(character = 0) {
+	// check if character has a gear or evo attacged
+	if (characters[character].evo || characters[character].gear1 || characters[character].gear2) {
+		expandedCharacter = character;
+		
+		if (!characters[character].evo)
+			$("#cc_evo").hide();
+		else
+			$("#cc_evo").attr("src", buildCardPath(characters[character].evo, true));
+		if (!characters[character].gear1)
+			$("#cc_gear1").hide();
+		else
+			$("#cc_gear1").attr("src", buildCardPath(characters[character].gear1, true));
+		if (!characters[character].gear2)
+			$("#cc_gear2").hide();
+		else
+			$("#cc_gear2").attr("src", buildCardPath(characters[character].gear2, true));
+			
+		
+		setOverlayButtons(-1);
+		$("#character_container").show();
+		$("#brawl_overlay_image").hide();
+		$("#brawl_overlay").show();
+		$("#brawl_overlay").css("opacity", 1);
+
+		$("#brawl_overlay").click(function(event) {
+			if (event.target == this) {
+				hideOverlay()
+			}
+		});
+	}
+}
+
+function discardOverlay() {
+	if (discard.length > 0) {
+		expandedCard = discard[discard.length - 1];
+
+		$("#brawl_overlay").show();
+		$("#brawl_overlay").css("opacity", 1);
+		$("#brawl_overlay").click(function(event) {
+			if (event.target == this) {
+				hideOverlay()
+			}
+		});
+	}
+}
+
+function hideOverlay() {
+	$("#brawl_overlay").css("opacity", 0);
+	setTimeout(function() {
+		$("#brawl_overlay").hide();
+		$("#character_container").hide();
+		$("#brawl_overlay_image").show();
+		$(".overlay_cc").show();
+	}, 200);
 }

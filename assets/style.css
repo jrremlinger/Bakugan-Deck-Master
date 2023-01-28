@@ -45,8 +45,20 @@
 	text-shadow: 0 0 5px black;
 	/* transform: translate(1700%, -335%); */
 	pointer-events: none;
-	bottom: 82px;
-	left: 172px;
+	bottom: 79px;
+	left: 174px;
+}
+
+.builder_deck_list_card_amount_gear {
+	font: 20px calibri;
+	font-weight: bold;
+	position: relative;
+	color: white;
+	text-shadow: 0 0 5px black;
+	/* transform: translate(1700%, -335%); */
+	pointer-events: none;
+	bottom: 96px;
+	left: 81px;
 }
 
 /* make the card list into a flex box */
@@ -381,6 +393,21 @@ button {
 
 #brawl_batch {
 	overflow: auto;
+}
+
+.overlay_cc {
+    max-width: 25vw;
+    max-height: 55vh;
+    object-fit: contain;
+	padding: 3px;
+}
+
+#character_container {
+	width: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
 }
 
 /* media query if less than 580 px */
