@@ -305,7 +305,9 @@ function setOverlayButtons(x = 0) {
 					"<button onclick=\"setOverlayButtons(8)\">Play Evo</button>"
 				);
 			}
-
+			$("#brawl_overlay_buttons").append(
+				"<button onclick=\"revealFromHand()\">Reveal</button>"
+			);
 			$("#brawl_overlay_buttons").append(
 				"<button onclick=\"setOverlayButtons(15)\">Send to Deck</button>"
 			);
@@ -757,7 +759,6 @@ function drawFromDeck(index = -1) {
 		}
 	}
 	hideOverlay();
-	updateUI();
 }
 
 function energizeFromDeck(charged, index = -1) {
@@ -776,7 +777,6 @@ function energizeFromDeck(charged, index = -1) {
 		}
 	}
 	hideOverlay();
-	updateUI();
 }
 
 
@@ -787,7 +787,6 @@ function discardFromDeck(index = -1) {
 		discard.push(activeDeck.deck.pop());
 	}
 	hideOverlay();
-	updateUI();
 }
 
 function searchDiscard() {
@@ -829,7 +828,6 @@ function energizeFromDiscard(x) {
 	discard.splice(expandedCard, 1);
 
 	hideOverlay();
-	updateUI();
 }
 
 function deckFromDiscard(pos) {
@@ -849,7 +847,6 @@ function deckFromDiscard(pos) {
 	discard.splice(expandedCard, 1);
 
 	hideOverlay();
-	updateUI();
 }
 
 function handFromDiscard() {
@@ -859,7 +856,6 @@ function handFromDiscard() {
 	discard.splice(expandedCard, 1);
 
 	hideOverlay();
-	updateUI();
 }
 
 function playFromDiscard(x = 0) {
@@ -893,7 +889,6 @@ function playFromDiscard(x = 0) {
 	discard.splice(expandedCard, 1);
 
 	hideOverlay();
-	updateUI();
 }
 
 function discardFromCharacter(x = 0) {
@@ -911,7 +906,6 @@ function discardFromCharacter(x = 0) {
 	}
 
 	updateUI();
-	hideOverlay();
 }
 
 function handFromCharacter(x = 0) {
@@ -929,7 +923,6 @@ function handFromCharacter(x = 0) {
 	}
 
 	updateUI();
-	hideOverlay();
 }
 
 function toggleControl() {
@@ -956,7 +949,6 @@ function handFromHero() {
 	heros.splice(expandedCard, 1);
 	// update UI
 	hideOverlay();
-	updateUI();
 }
 
 function deckFromBatch(pos) {
@@ -976,7 +968,6 @@ function deckFromBatch(pos) {
 	batch.splice(expandedCard, 1);
 
 	hideOverlay();
-	updateUI();
 }
 
 function deckFromHand(pos) {
@@ -996,7 +987,6 @@ function deckFromHand(pos) {
 	hand.splice(expandedCard, 1);
 
 	hideOverlay();
-	updateUI();
 }
 
 function handFromBatch() {
@@ -1008,7 +998,6 @@ function handFromBatch() {
 	batch.splice(expandedCard, 1);
 
 	hideOverlay();
-	updateUI();
 }
 
 function discardFromBatch() {
@@ -1020,7 +1009,6 @@ function discardFromBatch() {
 	batch.splice(expandedCard, 1);
 
 	hideOverlay();
-	updateUI();
 }
 
 function discardHero() {
@@ -1035,7 +1023,6 @@ function discardHero() {
 	heros.splice(expandedCard, 1);
 
 	hideOverlay();
-	updateUI();
 }
 
 function gearFromHand(character, slot) {
@@ -1048,7 +1035,6 @@ function gearFromHand(character, slot) {
 	hand.splice(expandedCard, 1);
 
 	hideOverlay();
-	updateUI();
 }
 
 function addGear(character, slot, card) {
@@ -1077,7 +1063,6 @@ function evoFromHand(character) {
 	hand.splice(expandedCard, 1);
 
 	hideOverlay();
-	updateUI();
 }
 
 function addEvo(character, card) {
@@ -1100,8 +1085,6 @@ function heroFromHand() {
 	hand.splice(expandedCard, 1);
 
 	hideOverlay();
-	updateUI();
-
 }
 
 function discardFromHand() {
@@ -1114,7 +1097,6 @@ function discardFromHand() {
 	hand.splice(expandedCard, 1);
 
 	hideOverlay();
-	updateUI();
 }
 
 function energizeFromHand(x) {
@@ -1130,7 +1112,6 @@ function energizeFromHand(x) {
 	hand.splice(expandedCard, 1);
 
 	hideOverlay();
-	updateUI();
 }
 
 function energizeFromHero(x) {
@@ -1150,7 +1131,6 @@ function energizeFromHero(x) {
 	heros.splice(expandedCard, 1);
 
 	hideOverlay();
-	updateUI();
 }
 
 function energizeFromBatch(x) {
@@ -1166,7 +1146,6 @@ function energizeFromBatch(x) {
 	batch.splice(expandedCard, 1);
 
 	hideOverlay();
-	updateUI();
 }
 
 function actionFromHand() {
@@ -1184,7 +1163,6 @@ function actionFromHand() {
 	hand.splice(expandedCard, 1);
 
 	hideOverlay();
-	updateUI();
 }
 
 function sortHand() {
@@ -1349,6 +1327,8 @@ function discardChangeSelected(x = 0) {
 }
 
 function hideOverlay() {
+	updateUI();
+
 	selectedCharacter = null;
 	expandedCard = null;
 	expandedCharacter = null;
@@ -1381,7 +1361,6 @@ function energizeDiscardPile() {
 
 	// update UI
 	hideOverlay();
-	updateUI();
 }
 
 function deckOverlay() {
@@ -1415,5 +1394,13 @@ function deckAmountEvent() {
 		if ($(this).val() > activeDeck.deck.length) {
 			$(this).val(activeDeck.deck.length);
 		}
+	});
+}
+
+function revealFromHand() {
+	setOverlayButtons(-1);
+	// html with class hand_expandable change src to assets\cards\BBPAC.png
+	$(".hand_expandable").each(function() {
+		$(this).attr("src", "assets/cards/BBPAC.png");
 	});
 }
