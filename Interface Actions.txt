@@ -1,17 +1,29 @@
 BRAINSTORM FURTHER BEFORE ACTION.
 THINK OF WHAT CAN BE INCLUDED ONLY IN THE DECK DAMAGE MENU
 
+Deck:
+	1. Damage menu
+		*Send to discard (amount, maybe option for 1 or range. 
+		Should see each card before going to the next and have actions for it. 
+		Flip/fliphero!!). End if discard below 0
+		*Send to batch
+		*Draw to hand immediately after playing a flip
+		* Back
+	
+	2. Search Deck
+		Deck search similar to discard menu. Seemingly only need to be able to add to hand (then shuffle)
+	5. Reveal [INPUT, def 1, MAX = deck size]
+		if 1, straight to card menu
+		else
+		show multi card selector click goes to menu. must keep track of indexes with array incase card moves
+
+	
 
 Deck (Brainstorming):
-	*Draw to hand (amount, maybe option for 1 or range)
-	*Send to discard (amount, maybe option for 1 or range. Should see each card before going to the next and have actions for it. Flip/fliphero!!). End if discard below 0
-	*Energize top card(s) (Charged, uncharged)
 	*View a certain amount of cards from top of deck and put them back (top, bottom, random)
-	*Send to batch
-	*Search deck and add card to hand, then shuffle
 	*Reveal top (options: play if nonflip/fliphero, draw, discard, return to top, buttom, shuffle)
 	*Search top (X) cards of deck (options: play, reorder (top/bottom (manual order), shuffle, top/bottom (rand order)) non-exclusive!!)
-	*Draw to hand immediately after playing a flip
+	
 
 Energy:
 	*Energized cards must be kept track of because they can be discarded and played from there.

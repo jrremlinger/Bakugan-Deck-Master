@@ -233,7 +233,7 @@ body {
 	/* height: 110px; */
 	padding: 3px;
 	text-align: center;
-	pointer-events: none;
+	/* pointer-events: none; */
 }
 
 /* Energy */

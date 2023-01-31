@@ -58,6 +58,8 @@ let expandedCard = null;
 let expandedCharacter = null;
 let characters = [];
 let selectedCharacter = null;
+let amountFromDeck = 0;
+let revealedIndexes = [];
 
 function brawlInit(x) {
 	// load a copy of activedeck
@@ -280,6 +282,8 @@ function createListeners() {
 }
 
 function setOverlayButtons(x = 0) {
+	if (x == 28)
+		amountFromDeck = $("#deck_amnt_input").val();
 	$("#brawl_overlay_buttons").empty();
 
 	switch (x) {
@@ -326,11 +330,7 @@ function setOverlayButtons(x = 0) {
 				<button onclick=\"setOverlayButtons(0)\">Back</button>`
 			);
 
-			$("#energy_cost").on("input", function() {
-				if ($(this).val() > parseInt($("#energy_current").html())) {
-					$(this).val(parseInt($("#energy_current").html()));
-				}
-			});
+			energyCostEvent();
 			break;
 		case 2: // Energize card in hand
 			$("#brawl_overlay_buttons").append(`
@@ -352,11 +352,7 @@ function setOverlayButtons(x = 0) {
 				<button onclick=\"setOverlayButtons(0)\">Back</button>`
 			);
 
-			$("#energy_cost").on("input", function() {
-				if ($(this).val() > parseInt($("#energy_current").html())) {
-					$(this).val(parseInt($("#energy_current").html()));
-				}
-			});
+			energyCostEvent();
 			break;
 		case 4: // Play Gear from hand
 			$("#brawl_overlay_buttons").append(`
@@ -395,11 +391,7 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<button onclick="setOverlayButtons(4)">Back</button>`
 			);
-			$("#energy_cost").on("input", function() {
-				if ($(this).val() > parseInt($("#energy_current").html())) {
-					$(this).val(parseInt($("#energy_current").html()));
-				}
-			});
+			energyCostEvent();
 			break;
 		case 6: // Gear menu 3
 			$("#brawl_overlay_buttons").append(`
@@ -423,11 +415,7 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<button onclick="setOverlayButtons(4)">Back</button>`
 			);
-			$("#energy_cost").on("input", function() {
-				if ($(this).val() > parseInt($("#energy_current").html())) {
-					$(this).val(parseInt($("#energy_current").html()));
-				}
-			});
+			energyCostEvent();
 			break;
 		case 7: // Gear menu 4
 			$("#brawl_overlay_buttons").append(`
@@ -451,11 +439,7 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<button onclick="setOverlayButtons(4)">Back</button>`
 			);
-			$("#energy_cost").on("input", function() {
-				if ($(this).val() > parseInt($("#energy_current").html())) {
-					$(this).val(parseInt($("#energy_current").html()));
-				}
-			});
+			energyCostEvent();
 			break;
 		case 8: // Play Evo from hand
 			$("#brawl_overlay_buttons").append(`
@@ -489,11 +473,7 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<button onclick="setOverlayButtons(8)">Back</button>`
 			);
-			$("#energy_cost").on("input", function() {
-				if ($(this).val() > parseInt($("#energy_current").html())) {
-					$(this).val(parseInt($("#energy_current").html()));
-				}
-			});
+			energyCostEvent();
 			break;
 		case 10: // Evo menu 3
 			$("#brawl_overlay_buttons").append(`
@@ -511,11 +491,7 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<button onclick="setOverlayButtons(8)">Back</button>`
 			);
-			$("#energy_cost").on("input", function() {
-				if ($(this).val() > parseInt($("#energy_current").html())) {
-					$(this).val(parseInt($("#energy_current").html()));
-				}
-			});
+			energyCostEvent();
 			break;
 		case 11: // Evo menu 4
 			$("#brawl_overlay_buttons").append(`
@@ -533,11 +509,7 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<button onclick="setOverlayButtons(8)">Back</button>`
 			);
-			$("#energy_cost").on("input", function() {
-				if ($(this).val() > parseInt($("#energy_current").html())) {
-					$(this).val(parseInt($("#energy_current").html()));
-				}
-			});
+			energyCostEvent();
 			break;
 		case 12: // Active Hero
 			$("#brawl_overlay_buttons").append(
@@ -703,11 +675,7 @@ function setOverlayButtons(x = 0) {
 				<button onclick=\"setOverlayButtons(22)\">Back</button>`
 			);
 
-			$("#energy_cost").on("input", function() {
-				if ($(this).val() > parseInt($("#energy_current").html())) {
-					$(this).val(parseInt($("#energy_current").html()));
-				}
-			});
+			energyCostEvent();
 			break;
 		case 24: // Discard character select
 			$("#brawl_overlay_buttons").append(`
@@ -747,7 +715,79 @@ function setOverlayButtons(x = 0) {
 				<button onclick=\"energizeFromDiscard(0)\">Energize\nUncharged</button>
 				<button onclick=\"setOverlayButtons(22)\">Back</button>
 			`);
+			break;
+		case 27: // Deck menu
+			$("#brawl_overlay_buttons").append(`
+				<div style="color: white;">Target all cards: </div>
+				<button onclick="">Damage Menu</button>
+				<button onclick="">Search Deck</button>
+				<button onclick="shuffleDeck(); hideOverlay();">Shuffle</button>
+				<div style="display: flex">
+					<div style="color: white;">Target top </div>
+					<input type="number" id="deck_amnt_input" min="0" max="${activeDeck.deck.length}" value="1">
+					<div style="color: white;"> cards</div>
+				</div>
+				<button onclick="drawFromDeck()">Draw</button>
+				<button onclick="">Reveal</button>
+				<button onclick="setOverlayButtons(28);">Energize</button>
+				<button onclick="discardFromDeck();">Discard</button>
+					
+			`);
+			deckAmountEvent();
+			break;
+		case 28: // Energize deck
+			$("#brawl_overlay_buttons").append(`
+				<button onclick="energizeFromDeck(1)">Energize\nCharged</button>
+				<button onclick="energizeFromDeck(0)">Energize\nUncharged</button>
+				<button onclick="setOverlayButtons(27)">Back</button>
+			`);
+			break;
 	}
+}
+
+function drawFromDeck(index = -1) {
+	amountFromDeck = parseInt($("#deck_amnt_input").val());
+
+	if (index != -1)
+		hand.push(activeDeck.deck.splice(index, 1)[0]);
+	else {
+		// draw cards from deck equaling parsed amount in deck_amnt_input
+		for (var i = 0; i < amountFromDeck; i++) {
+			hand.push(activeDeck.deck.pop());
+		}
+	}
+	hideOverlay();
+	updateUI();
+}
+
+function energizeFromDeck(charged, index = -1) {
+	if (index != -1) {
+		manageEnergy(2);
+		if (charged) 
+			manageEnergy(0);
+		activeDeck.deck.splice(index, 1);
+	} else {
+		for (var i = 0; i < amountFromDeck; i++) {
+			manageEnergy(2);
+			if (charged) 
+				manageEnergy(0);
+			
+			activeDeck.deck.pop();
+		}
+	}
+	hideOverlay();
+	updateUI();
+}
+
+
+function discardFromDeck(index = -1) {
+	// discard cards from deck equaling parsed amount in deck_amnt_input
+	amountFromDeck = parseInt($("#deck_amnt_input").val());
+	for (var i = 0; i < amountFromDeck; i++) {
+		discard.push(activeDeck.deck.pop());
+	}
+	hideOverlay();
+	updateUI();
 }
 
 function searchDiscard() {
@@ -1342,4 +1382,38 @@ function energizeDiscardPile() {
 	// update UI
 	hideOverlay();
 	updateUI();
+}
+
+function deckOverlay() {
+	if (activeDeck.deck.length > 0) {
+		amountFromDeck = 0;
+		revealedIndexes = [];
+		setOverlayButtons(27);
+
+		$("#brawl_overlay_image").hide();
+
+		$("#brawl_overlay").show();
+		$("#brawl_overlay").css("opacity", 1);
+		$("#brawl_overlay").click(function(event) {
+			if (event.target == this) {
+				hideOverlay();
+			}
+		});
+	}
+}
+
+function energyCostEvent() {
+	$("#energy_cost").on("input", function() {
+		if ($(this).val() > parseInt($("#energy_current").html())) {
+			$(this).val(parseInt($("#energy_current").html()));
+		}
+	});
+}
+
+function deckAmountEvent() {
+	$("#deck_amnt_input").on("input", function() {
+		if ($(this).val() > activeDeck.deck.length) {
+			$(this).val(activeDeck.deck.length);
+		}
+	});
 }
