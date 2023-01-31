@@ -57,6 +57,7 @@ let discard = [];
 let expandedCard = null;
 let expandedCharacter = null;
 let characters = [];
+let selectedCharacter = null;
 
 function brawlInit(x) {
 	// load a copy of activedeck
@@ -68,6 +69,7 @@ function brawlInit(x) {
 	expandedCard = null;
 	expandedCharacter = null;
 	enemyHeros = [];
+	selectedCharacter = null;
 	
 	$("#energy_current").html("0");
 	$("#energy_total").html("0");
@@ -75,8 +77,7 @@ function brawlInit(x) {
 	shuffleDeck();
 
 	hand = activeDeck.deck.slice(0, 6);
-	// hand.push(card_db[263], card_db[264], card_db[265], card_db[202], card_db[203], card_db[204], card_db[876], card_db[877], card_db[878]);
-
+	
 	//  remove cards from deck
 	activeDeck.deck.splice(0, 6);
 
@@ -629,7 +630,238 @@ function setOverlayButtons(x = 0) {
 				<button onclick=\"discardFromCharacter(2)\">Destroy Dual-Gear</button>
 			`);
 			break;
+		case 21: // Discard pile menu
+			expandedCard = discard.length - 1;
+			$("#brawl_overlay_image").attr("src", buildCardPath(discard[expandedCard], true));
+		
+			$("#brawl_overlay_buttons").append(`
+				<button onclick="searchDiscard()">Search</button>
+				<button onclick="discardChangeSelected()">Top Card</button>
+				<button onclick="discardChangeSelected(1)">Choose Random</button>
+			`);
+			break;
+		case 22: // Discard card menu
+			if (discard[expandedCard].type == "ACTION" || discard[expandedCard].type == "GEOGAN") {
+				$("#brawl_overlay_buttons").append(
+					"<button onclick=\"setOverlayButtons(23)\">Use</button>"
+				);
+			} else if (discard[expandedCard].type == "HERO") {
+				$("#brawl_overlay_buttons").append(
+					"<button onclick=\"setOverlayButtons(23)\">Play Hero</button>"
+				);
+			} else if (discard[expandedCard].type == "BAKU-GEAR") {
+				$("#brawl_overlay_buttons").append(
+					"<button onclick=\"setOverlayButtons(24)\">Attach Baku-Gear</button>"
+				);
+			} else if (discard[expandedCard].type == "EVO") {
+				$("#brawl_overlay_buttons").append(
+					"<button onclick=\"setOverlayButtons(24)\">Play Evo</button>"
+				);
+			}
+
+			$("#brawl_overlay_buttons").append(`
+				<button onclick="handFromDiscard()">Send to Hand</button>
+				<button onclick="setOverlayButtons(25)">Send to Deck</button>
+				<button onclick="setOverlayButtons(26)">Energize</button>
+				<button onclick="setOverlayButtons(21)">Back</button>
+			`);
+			break;
+		case 23: // Use from Discard
+			$("#brawl_overlay_buttons").append(`
+				<div style=\"display: flex; align-items: center;\">
+					<span style=\"color: white;\">Cost: </span>
+					<input type=\"number\" id=\"energy_cost\" min=\"0\" max="${parseInt($("#energy_current").html()) * 10}" value=\"0\">
+					<div style="white-space: nowrap; color: white;">(${$("#energy_current").html()} Available)</div>
+				</div>`
+			);
+
+			if (discard[expandedCard].type == "ACTION" || discard[expandedCard].type == "GEOGAN") {
+				$("#brawl_overlay_buttons").append(
+					"<button onclick=\"playFromDiscard()\">Use</button>"
+				);
+			} else if (discard[expandedCard].type == "HERO") {
+				$("#brawl_overlay_buttons").append(`
+					<button onclick=\"playFromDiscard()\">Play Hero</button>`
+				);
+			} else if (discard[expandedCard].type == "BAKU-GEAR") {
+				$("#brawl_overlay_buttons").append(`
+					<button onclick=\"playFromDiscard()\">Baku-Gear (${characters[selectedCharacter].gear1 ? characters[selectedCharacter].gear1.name : "Empty"})</button>
+				`);
+
+				if (characters[selectedCharacter].gear1) {
+					$("#brawl_overlay_buttons").append(`
+						<button onclick=\"playFromDiscard(1)\">Dual-Gear (${characters[selectedCharacter].gear2 ? characters[selectedCharacter].gear2.name : "Empty"})</button>
+					`);
+				}
+			} else if (discard[expandedCard].type == "EVO") {
+				$("#brawl_overlay_buttons").append(`
+					<button onclick=\"playFromDiscard()\">Evolve (${characters[selectedCharacter].evo ? characters[selectedCharacter].evo.name.replace(/\(.*/, "").trim() : "Empty"})</button>
+				`);
+			}
+			
+			$("#brawl_overlay_buttons").append(`
+				<button onclick=\"setOverlayButtons(22)\">Back</button>`
+			);
+
+			$("#energy_cost").on("input", function() {
+				if ($(this).val() > parseInt($("#energy_current").html())) {
+					$(this).val(parseInt($("#energy_current").html()));
+				}
+			});
+			break;
+		case 24: // Discard character select
+			$("#brawl_overlay_buttons").append(`
+				<div style="display: flex; align-items: center; color: white;">Choose a Character: </div>`
+			);
+			if ((characters[0].faction == discard[expandedCard].faction && discard[expandedCard].type == "EVO") || discard[expandedCard].type == "BAKU-GEAR") {
+				$("#brawl_overlay_buttons").append(`
+					<button onclick="selectedCharacter = 0; setOverlayButtons(23);">Character 1 <img style="height: 20px;" src="assets/svg/BBP_${characters[0].faction}.svg" /></button>
+				`);
+			} 
+			if ((characters[1].faction == discard[expandedCard].faction && discard[expandedCard].type == "EVO") || discard[expandedCard].type == "BAKU-GEAR") {
+				$("#brawl_overlay_buttons").append(`
+					<button onclick="selectedCharacter = 1; setOverlayButtons(23);">Character 2 <img style="height: 20px;" src="assets/svg/BBP_${characters[1].faction}.svg" /></button>
+				`);
+			}
+			if ((characters[2].faction == discard[expandedCard].faction && discard[expandedCard].type == "EVO") || discard[expandedCard].type == "BAKU-GEAR") {
+				$("#brawl_overlay_buttons").append(`
+					<button onclick="selectedCharacter = 2; setOverlayButtons(23);">Character 3 <img style="height: 20px;" src="assets/svg/BBP_${characters[2].faction}.svg" /></button>
+				`);
+			}
+
+			$("#brawl_overlay_buttons").append(`
+				<button onclick="setOverlayButtons(22)">Back</button>`
+			);
+			break;
+		case 25: // Discard to deck options
+			$("#brawl_overlay_buttons").append(`
+				<button onclick="deckFromDiscard(1)">Top of Deck</button>
+				<button onclick="deckFromDiscard()">Bottom of Deck</button>
+				<button onclick="deckFromDiscard(3)">Shuffle</button>
+				<button onclick="setOverlayButtons(22)">Back</button>
+			`);
+			break;
+		case 26: // Discard to energy
+			$("#brawl_overlay_buttons").append(`
+				<button onclick=\"energizeFromDiscard(1)\">Energize\nCharged</button>
+				<button onclick=\"energizeFromDiscard(0)\">Energize\nUncharged</button>
+				<button onclick=\"setOverlayButtons(22)\">Back</button>
+			`);
 	}
+}
+
+function searchDiscard() {
+	$("#brawl_overlay_buttons").children("button").prop("disabled", true);
+
+	$("#discard_overlay_title").html(`Discard Pile (Bottom to Top)<br>Total: ${discard.length}`);
+
+	$("#discard_overlay").show();
+	$("#brawl_overlay_image").hide();
+	$("#brawl_overlay_buttons").hide();
+	
+	//append picture of all cards into discard overlay
+	$("#discard_overlay_cards").empty();
+	for (var i = 0; i < discard.length; i++) {
+		$("#discard_overlay_cards").append(`
+			<img src=\"${buildCardPath(discard[i])}" />
+		`);
+	}
+
+	//add click event to each card
+	$("#discard_overlay_cards").children("img").click(function() {
+		expandedCard = $(this).index();
+		$("#brawl_overlay_image").attr("src", buildCardPath(discard[expandedCard], true));
+		setOverlayButtons(22);
+		exitDiscardSearch();
+	});
+
+	$("#brawl_overlay").click(function(event) {
+		if (event.target == this) {
+			$("#discard_overlay").hide();
+			$("#brawl_overlay_image").show();
+			$("#brawl_overlay_buttons").show();
+		}
+	});
+}
+
+function energizeFromDiscard(x) {
+	$("#brawl_overlay_buttons").children("button").prop("disabled", true);
+
+	// add 1 energy to total and available
+	manageEnergy(2);
+	if (x > 0) {
+		manageEnergy(0);
+	}
+
+	// remove card from hero
+	discard.splice(expandedCard, 1);
+
+	hideOverlay();
+	updateUI();
+}
+
+function deckFromDiscard(pos) {
+	$("#brawl_overlay_buttons").children("button").prop("disabled", true);
+	// add card to deck
+	if (pos == 1) {
+		activeDeck.deck.push(discard[expandedCard]);
+	} else if (!pos) {
+		activeDeck.deck.unshift(discard[expandedCard]);
+	} else {
+		// push card to deck then shuffle
+		activeDeck.deck.push(discard[expandedCard]);
+		shuffleDeck();
+	}
+
+	// remove card from discard
+	discard.splice(expandedCard, 1);
+
+	hideOverlay();
+	updateUI();
+}
+
+function handFromDiscard() {
+	$("#brawl_overlay_buttons").children("button").prop("disabled", true);
+
+	hand.push(discard[expandedCard]);
+	discard.splice(expandedCard, 1);
+
+	hideOverlay();
+	updateUI();
+}
+
+function playFromDiscard(x = 0) {
+	$("#brawl_overlay_buttons").children("button").prop("disabled", true);
+
+	manageEnergy(4, parseInt($("#energy_cost").val()));
+
+	if (discard[expandedCard].type == "ACTION" || discard[expandedCard].type == "GEOGAN")
+		batch.push(discard[expandedCard]);
+	else if (discard[expandedCard].type == "HERO")
+		heros.push(discard[expandedCard]);
+	else if (discard[expandedCard].type == "BAKU-GEAR") {
+		if (x == 0) {
+			if (characters[selectedCharacter].gear1) {
+				discard.push(characters[selectedCharacter].gear1);
+			}
+			characters[selectedCharacter].gear1 = discard[expandedCard];
+		}
+		else if (x == 1) {
+			if (characters[selectedCharacter].gear2)
+				discard.push(characters[selectedCharacter].gear2);
+			characters[selectedCharacter].gear2 = discard[expandedCard];
+		}
+	}
+	else if (discard[expandedCard].type == "EVO") {
+		if (characters[selectedCharacter].evo)
+			discard.push(characters[selectedCharacter].evo);
+		characters[selectedCharacter].evo = discard[expandedCard];
+	}
+		
+	discard.splice(expandedCard, 1);
+
+	hideOverlay();
+	updateUI();
 }
 
 function discardFromCharacter(x = 0) {
@@ -691,11 +923,8 @@ function handFromHero() {
 	// remove card from deck
 	heros.splice(expandedCard, 1);
 	// update UI
+	hideOverlay();
 	updateUI();
-	$("#brawl_overlay").css("opacity", 0);
-	setTimeout(function() {
-		$("#brawl_overlay").hide();
-	}, 200);
 }
 
 function deckFromBatch(pos) {
@@ -714,13 +943,8 @@ function deckFromBatch(pos) {
 	// remove card from batch
 	batch.splice(expandedCard, 1);
 
-	// update UI
+	hideOverlay();
 	updateUI();
-
-	$("#brawl_overlay").css("opacity", 0);
-	setTimeout(function() {
-		$("#brawl_overlay").hide();
-	}, 200);
 }
 
 function deckFromHand(pos) {
@@ -739,13 +963,8 @@ function deckFromHand(pos) {
 	// remove card from hand
 	hand.splice(expandedCard, 1);
 
-	// update UI
+	hideOverlay();
 	updateUI();
-
-	$("#brawl_overlay").css("opacity", 0);
-	setTimeout(function() {
-		$("#brawl_overlay").hide();
-	}, 200);
 }
 
 function handFromBatch() {
@@ -756,13 +975,8 @@ function handFromBatch() {
 	// remove card from batch
 	batch.splice(expandedCard, 1);
 
-	// update UI
+	hideOverlay();
 	updateUI();
-
-	$("#brawl_overlay").css("opacity", 0);
-	setTimeout(function() {
-		$("#brawl_overlay").hide();
-	}, 200);
 }
 
 function discardFromBatch() {
@@ -773,13 +987,8 @@ function discardFromBatch() {
 	// remove card from batch
 	batch.splice(expandedCard, 1);
 
-	// update UI
+	hideOverlay();
 	updateUI();
-
-	$("#brawl_overlay").css("opacity", 0);
-	setTimeout(function() {
-		$("#brawl_overlay").hide();
-	}, 200);
 }
 
 function discardHero() {
@@ -793,13 +1002,8 @@ function discardHero() {
 	// remove card from heros
 	heros.splice(expandedCard, 1);
 
-	// update UI
+	hideOverlay();
 	updateUI();
-
-	$("#brawl_overlay").css("opacity", 0);
-	setTimeout(function() {
-		$("#brawl_overlay").hide();
-	}, 200);
 }
 
 function gearFromHand(character, slot) {
@@ -811,13 +1015,8 @@ function gearFromHand(character, slot) {
 	// remove card from hand
 	hand.splice(expandedCard, 1);
 
-	// update UI
+	hideOverlay();
 	updateUI();
-
-	$("#brawl_overlay").css("opacity", 0);
-	setTimeout(function() {
-		$("#brawl_overlay").hide();
-	}, 200);
 }
 
 function addGear(character, slot, card) {
@@ -845,13 +1044,8 @@ function evoFromHand(character) {
 	// remove card from hand
 	hand.splice(expandedCard, 1);
 
-	// update UI
+	hideOverlay();
 	updateUI();
-
-	$("#brawl_overlay").css("opacity", 0);
-	setTimeout(function() {
-		$("#brawl_overlay").hide();
-	}, 200);
 }
 
 function addEvo(character, card) {
@@ -867,18 +1061,13 @@ function heroFromHand() {
 	$("#brawl_overlay_buttons").children("button").prop("disabled", true);
 	manageEnergy(4, parseInt($("#energy_cost").val()));
 
-	$("#brawl_overlay").css("opacity", 0);
-	setTimeout(function() {
-		$("#brawl_overlay").hide();
-	}, 200);
-
 	// Add card to heros list
 	heros.push(hand[expandedCard]);
 	
 	// remove card from hand
 	hand.splice(expandedCard, 1);
 
-	// update UI
+	hideOverlay();
 	updateUI();
 
 }
@@ -892,12 +1081,7 @@ function discardFromHand() {
 	// remove card from hand
 	hand.splice(expandedCard, 1);
 
-	$("#brawl_overlay").css("opacity", 0);
-	setTimeout(function() {
-		$("#brawl_overlay").hide();
-	}, 200);
-
-	// update ui
+	hideOverlay();
 	updateUI();
 }
 
@@ -910,15 +1094,10 @@ function energizeFromHand(x) {
 		manageEnergy(0);
 	}
 
-	$("#brawl_overlay").css("opacity", 0);
-	setTimeout(function() {
-		$("#brawl_overlay").hide();
-	}, 200);
-
 	// remove card from hand
 	hand.splice(expandedCard, 1);
 
-	// update ui
+	hideOverlay();
 	updateUI();
 }
 
@@ -931,11 +1110,6 @@ function energizeFromHero(x) {
 		manageEnergy(0);
 	}
 
-	$("#brawl_overlay").css("opacity", 0);
-	setTimeout(function() {
-		$("#brawl_overlay").hide();
-	}, 200);
-
 	// Remove enemyHero for index
 	if (enemyHeros.includes(expandedCard))
 		enemyHeros.splice(enemyHeros.indexOf(expandedCard), 1);
@@ -943,7 +1117,7 @@ function energizeFromHero(x) {
 	// remove card from hero
 	heros.splice(expandedCard, 1);
 
-	// update ui
+	hideOverlay();
 	updateUI();
 }
 
@@ -956,15 +1130,10 @@ function energizeFromBatch(x) {
 		manageEnergy(0);
 	}
 
-	$("#brawl_overlay").css("opacity", 0);
-	setTimeout(function() {
-		$("#brawl_overlay").hide();
-	}, 200);
-
 	// remove card from batch
 	batch.splice(expandedCard, 1);
 
-	// update ui
+	hideOverlay();
 	updateUI();
 }
 
@@ -975,10 +1144,6 @@ function actionFromHand() {
 	
 	manageEnergy(4, parseInt($("#energy_cost").val()));
 	
-	$("#brawl_overlay").css("opacity", 0);
-	setTimeout(function() {
-		$("#brawl_overlay").hide();
-	}, 200);
 
 	// add card to batch
 	batch.push(hand[expandedCard]);
@@ -986,7 +1151,7 @@ function actionFromHand() {
 	// remove card from hand
 	hand.splice(expandedCard, 1);
 
-	// update UI
+	hideOverlay();
 	updateUI();
 }
 
@@ -1127,26 +1292,62 @@ function characterOverlay(character = 0) {
 
 function discardOverlay() {
 	if (discard.length > 0) {
-		expandedCard = discard[discard.length - 1];
-		$("#brawl_overlay_image").attr("src", buildCardPath(expandedCard, true));
-		setOverlayButtons(-1);
+		setOverlayButtons(21);
 
 		$("#brawl_overlay").show();
 		$("#brawl_overlay").css("opacity", 1);
 		$("#brawl_overlay").click(function(event) {
 			if (event.target == this) {
-				hideOverlay()
+				hideOverlay();
 			}
 		});
 	}
 }
 
+function discardChangeSelected(x = 0) {
+	if (x == 0) {
+		expandedCard = discard.length - 1;
+		$("#brawl_overlay_image").attr("src", buildCardPath(discard[expandedCard], true));
+		setOverlayButtons(22);
+	} else if (x == 1) {
+		expandedCard = Math.floor(Math.random() * discard.length);
+		$("#brawl_overlay_image").attr("src", buildCardPath(discard[expandedCard], true));
+		setOverlayButtons(22);
+	}
+}
+
 function hideOverlay() {
+	selectedCharacter = null;
+	expandedCard = null;
+	expandedCharacter = null;
+
 	$("#brawl_overlay").css("opacity", 0);
 	setTimeout(function() {
 		$("#brawl_overlay").hide();
+		$("#discard_overlay").hide();
 		$("#character_container").hide();
 		$("#brawl_overlay_image").show();
+		$("#brawl_overlay_buttons").show();
 		$(".overlay_cc").show();
 	}, 200);
+}
+
+function exitDiscardSearch() {
+	$("#discard_overlay").hide();
+	$("#brawl_overlay_image").show();
+	$("#brawl_overlay_buttons").show();
+	$("#brawl_overlay_buttons").children("button").prop("disabled", false);
+}
+
+function energizeDiscardPile() {
+	// energize discard pile
+	for (var i = 0; i < discard.length; i++) {
+		manageEnergy(2);
+	}
+
+	discard = [];
+
+	// update UI
+	hideOverlay();
+	updateUI();
 }

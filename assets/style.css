@@ -358,6 +358,49 @@ body {
 	pointer-events: none;
 }
 
+#discard_overlay {
+	width: 100%;
+    display: flex;
+    flex-direction: column;
+	align-items: center;
+}
+
+#discard_overlay_cards {
+	max-width: 90%;
+	overflow-x: scroll;
+	display: flex;
+	align-items: center;
+}
+
+#discard_overlay_menu {
+	width: 90%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+#discard_overlay_menu * {
+	margin: 5px;
+	font-size: 20px;
+}
+
+#discard_overlay_title {
+	width: 90%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	font-size: 30px;
+	text-align: center;
+}
+#discard_overlay_cards img {
+	object-fit: contain;
+	/* height: 180px; */
+	height: 40vh;
+	padding: 3px;
+}
+
 #brawl_overlay_buttons button, #brawl_overlay_buttons div, #brawl_overlay_buttons input {
 	margin: 10px;
 	display: block;    
@@ -426,7 +469,7 @@ button {
 	}
 	#brawl_energy {
 		margin-left: auto;
-    	margin-right: 0;
+		margin-right: 0;
 	}
 
 	#brawl_overlay_image, #card_overlay img {

@@ -1,54 +1,6 @@
 BRAINSTORM FURTHER BEFORE ACTION.
 THINK OF WHAT CAN BE INCLUDED ONLY IN THE DECK DAMAGE MENU
 
-Discard pile:
-	1. View all
-		Display total of discarded cards
-		Click any card for options
-			1. Use
-				*Cost Menu
-			2. Send to Hand
-			3. Send to Deck
-				1. Top of Deck
-				2. Bottom of Deck
-				3. Shuffle
-				4. Back
-			4. Energize
-				1. Energize Charged
-				2. Energize Uncharged
-				3. Back
-			5. Back
-		1. Energize All
-		2. Back
-	2. Top Card
-		1. Use
-			*Cost Menu
-		2. Send to Hand
-		3. Send to Deck
-			1. Top of Deck
-			2. Bottom of Deck
-			3. Shuffle
-			4. Back
-		4. Energize
-			1. Energize Charged
-			2. Energize Uncharged
-			3. Back
-		5. Back
-	3. Choose Random
-		Shuffle discard pile, select random card
-		1. Use
-			*Cost Menu
-		2. Send to Hand
-		3. Send to Deck
-			1. Top of Deck
-			2. Bottom of Deck
-			3. Shuffle
-			4. Back
-		4. Energize
-			1. Energize Charged
-			2. Energize Uncharged
-			3. Back
-		5. Back
 
 Deck (Brainstorming):
 	*Draw to hand (amount, maybe option for 1 or range)

@@ -28,12 +28,20 @@
 	<div id="brawl_ui">
 		<div id="brawl_overlay" style="display: none;">
 			<img id="brawl_overlay_image" src="" alt="">
+			<div id="discard_overlay" style="display: none;">
+				<div id="discard_overlay_cards"></div>
+				<div id="discard_overlay_menu">
+					<div id="discard_overlay_title"></div>
+					<button onclick="energizeDiscardPile()">Energize All (Uncharged)</button>
+					<button onclick="exitDiscardSearch()">Back</button>
+				</div>
+			</div>
 			<div id="character_container" style="display: none;">
 				<img class="overlay_cc" id="cc_evo" onclick="setOverlayButtons(18)" src="assets/cards/BBPCC-Dark.png" />
 				<img class="overlay_cc" id="cc_gear1" onclick="setOverlayButtons(19)" src="assets/cards/BBPAC.png" />
 				<img class="overlay_cc" id="cc_gear2" onclick="setOverlayButtons(20)" src="assets/cards/BBPAC.png" />
 			</div>
-			<div  id="brawl_overlay_buttons"></div>
+			<div id="brawl_overlay_buttons"></div>
 		</div>
 		<div id="brawl_header">
 			<div id="brawl_header_start">
