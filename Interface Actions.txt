@@ -7,8 +7,6 @@ Deck:
 		*Draw to hand immediately after playing a flip
 		* Back
 	
-	2. Search Deck
-		Deck search similar to discard menu. Seemingly only need to be able to add to hand (then shuffle)
 	5. Reveal [INPUT, def 1, MAX = deck size]
 		if 1, straight to card menu
 		else

@@ -358,21 +358,21 @@ body {
 	pointer-events: none;
 }
 
-#discard_overlay {
+#discard_overlay, #deck_overlay {
 	width: 100%;
     display: flex;
     flex-direction: column;
 	align-items: center;
 }
 
-#discard_overlay_cards {
+#discard_overlay_cards, #deck_overlay_cards {
 	max-width: 90%;
 	overflow-x: scroll;
 	display: flex;
 	align-items: center;
 }
 
-#discard_overlay_menu {
+#discard_overlay_menu, #deck_overlay_menu {
 	width: 90%;
 	display: flex;
 	justify-content: center;
@@ -380,12 +380,12 @@ body {
 	flex-direction: column;
 }
 
-#discard_overlay_menu * {
+#discard_overlay_menu *, #deck_overlay_menu * {
 	margin: 5px;
 	font-size: 20px;
 }
 
-#discard_overlay_title {
+#discard_overlay_title, #deck_overlay_title {
 	width: 90%;
 	display: flex;
 	justify-content: center;
@@ -394,7 +394,7 @@ body {
 	font-size: 30px;
 	text-align: center;
 }
-#discard_overlay_cards img {
+#discard_overlay_cards img, #deck_overlay_cards img {
 	object-fit: contain;
 	/* height: 180px; */
 	height: 40vh;

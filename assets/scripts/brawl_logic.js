@@ -719,10 +719,11 @@ function setOverlayButtons(x = 0) {
 			`);
 			break;
 		case 27: // Deck menu
+			$("#brawl_overlay_image").hide();
 			$("#brawl_overlay_buttons").append(`
 				<div style="color: white;">Target all cards: </div>
 				<button onclick="">Damage Menu</button>
-				<button onclick="">Search Deck</button>
+				<button onclick="searchDeck()">Search Deck</button>
 				<button onclick="shuffleDeck(); hideOverlay();">Shuffle</button>
 				<div style="display: flex">
 					<div style="color: white;">Target top </div>
@@ -744,7 +745,39 @@ function setOverlayButtons(x = 0) {
 				<button onclick="setOverlayButtons(27)">Back</button>
 			`);
 			break;
+		case 29: // Deck search to hand
+			$("#brawl_overlay_buttons").append(`
+				<button onclick="drawFromDeck(${expandedCard})">Send to Hand</button>
+				<button onclick="setOverlayButtons(27)">Back</button>
+			`);
+			break;
 	}
+}
+
+function searchDeck() {
+	$("#brawl_overlay_buttons").children("button").prop("disabled", true);
+
+	$("#deck_overlay_title").html(`Deck (Bottom to Top)<br>Total: ${activeDeck.deck.length}`);
+
+	$("#deck_overlay").show();
+	$("#brawl_overlay_image").hide();
+	$("#brawl_overlay_buttons").hide();
+	
+	//append picture of all cards into discard overlay
+	$("#deck_overlay_cards").empty();
+	for (var i = 0; i < activeDeck.deck.length; i++) {
+		$("#deck_overlay_cards").append(`
+			<img src=\"${buildCardPath(activeDeck.deck[i])}" />
+		`);
+	}
+
+	//add click event to each card
+	$("#deck_overlay_cards").children("img").click(function() {
+		expandedCard = $(this).index();
+		$("#brawl_overlay_image").attr("src", buildCardPath(activeDeck.deck[expandedCard], true));
+		setOverlayButtons(29);
+		exitDeckSearch();
+	});
 }
 
 function drawFromDeck(index = -1) {
@@ -1337,6 +1370,7 @@ function hideOverlay() {
 	setTimeout(function() {
 		$("#brawl_overlay").hide();
 		$("#discard_overlay").hide();
+		$("#deck_overlay").hide();
 		$("#character_container").hide();
 		$("#brawl_overlay_image").show();
 		$("#brawl_overlay_buttons").show();
@@ -1346,6 +1380,13 @@ function hideOverlay() {
 
 function exitDiscardSearch() {
 	$("#discard_overlay").hide();
+	$("#brawl_overlay_image").show();
+	$("#brawl_overlay_buttons").show();
+	$("#brawl_overlay_buttons").children("button").prop("disabled", false);
+}
+
+function exitDeckSearch() {
+	$("#deck_overlay").hide();
 	$("#brawl_overlay_image").show();
 	$("#brawl_overlay_buttons").show();
 	$("#brawl_overlay_buttons").children("button").prop("disabled", false);
@@ -1368,8 +1409,6 @@ function deckOverlay() {
 		amountFromDeck = 0;
 		revealedIndexes = [];
 		setOverlayButtons(27);
-
-		$("#brawl_overlay_image").hide();
 
 		$("#brawl_overlay").show();
 		$("#brawl_overlay").css("opacity", 1);
