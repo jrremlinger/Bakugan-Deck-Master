@@ -774,14 +774,6 @@ function searchDiscard() {
 		setOverlayButtons(22);
 		exitDiscardSearch();
 	});
-
-	$("#brawl_overlay").click(function(event) {
-		if (event.target == this) {
-			$("#discard_overlay").hide();
-			$("#brawl_overlay_image").show();
-			$("#brawl_overlay_buttons").show();
-		}
-	});
 }
 
 function energizeFromDiscard(x) {
