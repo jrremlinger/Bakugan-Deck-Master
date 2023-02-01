@@ -1,0 +1,12 @@
+Energy:
+	*Energized cards must be kept track of because they can be discarded and played from there.
+
+Misc:
+	*Make mouse events work for re-ordering
+	*Refactor code, way too many functions that can be consolidated 
+
+Deck: COMPLETE
+Hand: COMPLETE
+Hero: COMPLETE
+Batch: COMPLETE
+Characters: COMPLETE
