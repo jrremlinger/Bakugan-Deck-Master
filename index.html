@@ -10,7 +10,7 @@
 	<title>Bakugan Deck Master</title>
 </head>
 <body>
-	<div id="menu_main" style="display: none;">
+	<div id="menu_main">
 		<h1>Bakugan Deck Master</h1>
 		<button id="brawl" onclick="$('#menu_main').hide(); $('#deck_select_menu').show(); checkValidDecks();">Brawl!</button>
 		<button id="deck_builder" onclick="$('#menu_main').hide(); $('#menu_deck_options').show();">Deck Builder</button>
@@ -25,7 +25,7 @@
 	</div>
 	
 	<!-- UI for the actual brawl card user-->
-	<div id="brawl_ui">
+	<div id="brawl_ui" style="display: none;">
 		<div id="brawl_overlay" style="display: none;">
 			<img id="brawl_overlay_image" src="" alt="">
 			<div id="discard_overlay" style="display: none;">

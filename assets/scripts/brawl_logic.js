@@ -1,54 +1,3 @@
-// Test deck immdeiately
-localStorage.setItem("deck_1", `
-	[{"name":"Inferno Wings","set":"BB","rarity":"SR","setNumber":"99","faction":["PYRUS"],"type":"ACTION"},
-	{"name":"Inferno Wings","set":"BB","rarity":"SR","setNumber":"99","faction":["PYRUS"],"type":"ACTION"},
-	{"name":"Might of Cyndeus","set":"BB","rarity":"RA","setNumber":"104","faction":["PYRUS"],"type":"ACTION"},
-	{"name":"Might of Cyndeus","set":"BB","rarity":"RA","setNumber":"104","faction":["PYRUS"],"type":"ACTION"},
-	{"name":"Might of Cyndeus","set":"BB","rarity":"RA","setNumber":"104","faction":["PYRUS"],"type":"ACTION"},
-	{"name":"Pact of Darkness","set":"BB","rarity":"SR","setNumber":"152","faction":["DARKUS"],"type":"FLIP"},
-	{"name":"Pact of Darkness","set":"BB","rarity":"SR","setNumber":"152","faction":["DARKUS"],"type":"FLIP"},
-	{"name":"Pact of Darkness","set":"BB","rarity":"SR","setNumber":"152","faction":["DARKUS"],"type":"FLIP"},
-	{"name":"Twisting Inferno","set":"BR","rarity":"RA","setNumber":"47","faction":["PYRUS"],"type":"ACTION"},
-	{"name":"Twisting Inferno","set":"BR","rarity":"RA","setNumber":"47","faction":["PYRUS"],"type":"ACTION"},
-	{"name":"Razor Tusk","set":"AV","rarity":"RA","setNumber":"15","faction":["DARKUS"],"type":"ACTION"},
-	{"name":"Haos Deflection","set":"AV","rarity":"RA","setNumber":"23","faction":["HAOS"],"type":"ACTION"},
-	{"name":"Haos Deflection","set":"AV","rarity":"RA","setNumber":"23","faction":["HAOS"],"type":"ACTION"},
-	{"name":"Haos Deflection","set":"AV","rarity":"RA","setNumber":"23","faction":["HAOS"],"type":"ACTION"},
-	{"name":"Haocrescents","set":"AV","rarity":"CO","setNumber":"24","faction":["HAOS"],"type":"ACTION"},
-	{"name":"Haocrescents","set":"AV","rarity":"CO","setNumber":"24","faction":["HAOS"],"type":"ACTION"},
-	{"name":"Haocrescents","set":"AV","rarity":"CO","setNumber":"24","faction":["HAOS"],"type":"ACTION"},
-	{"name":"Pyrus Vortex","set":"AV","rarity":"CO","setNumber":"26","faction":["PYRUS"],"type":"ACTION"},
-	{"name":"Pyrus Vortex","set":"AV","rarity":"CO","setNumber":"26","faction":["PYRUS"],"type":"ACTION"},
-	{"name":"Pyrus Vortex","set":"AV","rarity":"CO","setNumber":"26","faction":["PYRUS"],"type":"ACTION"},
-	{"name":"Darkus Ash","set":"AV","rarity":"CO","setNumber":"45","faction":["PYRUS","DARKUS"],"type":"ACTION"},
-	{"name":"Darkus Ash","set":"AV","rarity":"CO","setNumber":"45","faction":["PYRUS","DARKUS"],"type":"ACTION"},
-	{"name":"Darkus Ash","set":"AV","rarity":"CO","setNumber":"45","faction":["PYRUS","DARKUS"],"type":"ACTION"},
-	{"name":"Shadowflame","set":"AV","rarity":"RA","setNumber":"46","faction":["PYRUS","DARKUS"],"type":"ACTION"},
-	{"name":"Shadowflame","set":"AV","rarity":"RA","setNumber":"46","faction":["PYRUS","DARKUS"],"type":"ACTION"},
-	{"name":"Shadowflame","set":"AV","rarity":"RA","setNumber":"46","faction":["PYRUS","DARKUS"],"type":"ACTION"},
-	{"name":"Pyrobliterator","set":"AV","rarity":"CO","setNumber":"51","faction":["HAOS","PYRUS"],"type":"ACTION"},
-	{"name":"Pyrobliterator","set":"AV","rarity":"CO","setNumber":"51","faction":["HAOS","PYRUS"],"type":"ACTION"},
-	{"name":"Pyrobliterator","set":"AV","rarity":"CO","setNumber":"51","faction":["HAOS","PYRUS"],"type":"ACTION"},
-	{"name":"Pyruportal","set":"AV","rarity":"CO","setNumber":"67","faction":["PYRUS","DARKUS"],"type":"FLIP"},
-	{"name":"Pyruportal","set":"AV","rarity":"CO","setNumber":"67","faction":["PYRUS","DARKUS"],"type":"FLIP"},
-	{"name":"Cosmic Fireball","set":"AV","rarity":"CO","setNumber":"68","faction":["HAOS","PYRUS"],"type":"FLIP"},
-	{"name":"Dragonoid, Skater Supreme","set":"AV","rarity":"RA","setNumber":"79","faction":["PYRUS"],"type":"HERO"},
-	{"name":"Dragonoid, Skater Supreme","set":"AV","rarity":"RA","setNumber":"79","faction":["PYRUS"],"type":"HERO"},
-	{"name":"Dragonoid, Skater Supreme","set":"AV","rarity":"RA","setNumber":"79","faction":["PYRUS"],"type":"HERO"},
-	{"name":"Twilight Axes","set":"AV","rarity":"SR","setNumber":"95","faction":["DARKUS"],"type":"BAKU-GEAR"},
-	{"name":"Twilight Axes","set":"AV","rarity":"SR","setNumber":"95","faction":["DARKUS"],"type":"BAKU-GEAR"},
-	{"name":"Ruinous Blade","set":"FF","rarity":"CO","setNumber":"49","faction":["PYRUS","DARKUS"],"type":"ACTION"},
-	{"name":"Ruinous Blade","set":"FF","rarity":"CO","setNumber":"49","faction":["PYRUS","DARKUS"],"type":"ACTION"},
-	{"name":"Ruinous Blade","set":"FF","rarity":"CO","setNumber":"49","faction":["PYRUS","DARKUS"],"type":"ACTION"}]`
-);
-
-$(window).on("load", function() {
-	checkValidDecks();
-	tryDeck(0);
-});
-
-
-
 let hand = [];
 let batch = [];
 let heros = [];
@@ -64,6 +13,11 @@ let damageTaken = 0;
 let flippedCards = [];
 
 function brawlInit(x) {
+	// UI fix
+	$("#brawl_deck_total").css("min-width", $(".brawl_cardimg").width() + "px");
+	$("#brawl_deck_total").css("padding-top", $(".brawl_cardimg").height() / 3.1 + "px");
+	$(".faction_container").css("top", $(".brawl_character_1").height() / 4.3 + "px");	// Possible not needed
+
 	// load a copy of activedeck
 	activeDeck = JSON.parse(JSON.stringify(x));
 
