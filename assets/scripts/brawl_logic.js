@@ -1561,12 +1561,14 @@ function manageEnergy(x = 0, y = 0) {
 			$("#energy_current").html(parseInt($("#energy_current").html()) + 1);
 			break;
 		case 1: // subtract 1 available energy
+			if (parseInt($("#energy_current").html()) <= 0) return; // if current energy is 0, do nothing (don't go negative
 			$("#energy_current").html(parseInt($("#energy_current").html()) - 1);
 			break;
 		case 2: // Add total energy
 			$("#energy_total").html(parseInt($("#energy_total").html()) + 1);
 			break;
 		case 3: // Subtract total energy
+			if (parseInt($("#energy_total").html()) <= 0) return;
 			// if current energy is equal or greater than total, subtract one from current
 			if (parseInt($("#energy_current").html()) >= parseInt($("#energy_total").html())) 
 				$("#energy_current").html(parseInt($("#energy_current").html()) - 1);
