@@ -740,7 +740,7 @@ function setOverlayButtons(x = 0) {
 						<div style="color: white;"> cards</div>
 					</div>
 					<button onclick="drawFromDeck()">Draw</button>
-					<button onclick="">Reveal</button>
+					<button onclick="revealFromDeck();">Reveal</button>
 					<button onclick="setOverlayButtons(28);">Energize</button>
 					<button onclick="discardFromDeck();">Discard</button>
 				`);
@@ -975,10 +975,182 @@ function setOverlayButtons(x = 0) {
 				<button onclick=\"setOverlayButtons(35)\">Back</button>
 			`);
 			break;
+		case 39: // Revealed card options
+			$("#brawl_overlay_image").show();
+			if (activeDeck.deck[expandedCard].type == "ACTION" || activeDeck.deck[expandedCard].type == "GEOGAN") {
+				$("#brawl_overlay_buttons").append(
+					"<button onclick=\"setOverlayButtons(40)\">Use</button>"
+				);
+			} else if (activeDeck.deck[expandedCard].type == "HERO") {
+				$("#brawl_overlay_buttons").append(
+					"<button onclick=\"setOverlayButtons(40)\">Play Hero</button>"
+				);
+			} else if (activeDeck.deck[expandedCard].type == "BAKU-GEAR") {
+				$("#brawl_overlay_buttons").append(
+					"<button onclick=\"setOverlayButtons(41)\">Attach Baku-Gear</button>"
+				);
+			} else if (activeDeck.deck[expandedCard].type == "EVO") {
+				$("#brawl_overlay_buttons").append(
+					"<button onclick=\"setOverlayButtons(41)\">Play Evo</button>"
+				);
+			}
+
+			$("#brawl_overlay_buttons").append(`
+				<button onclick="drawFromDeck(${expandedCard});">Send to Hand</button>
+				<button onclick="setOverlayButtons(43);">Return to Deck</button>
+				<button onclick="setOverlayButtons(42);">Energize</button>
+				<button onclick="discardFromDeck(${expandedCard});">Discard</button>
+				<button onclick="setOverlayButtons(27)">Back</button>
+			`);
+			break;
+		case 40: // Use revealed card
+			$("#brawl_overlay_buttons").append(`
+				<div style=\"display: flex; align-items: center;\">
+					<span style=\"color: white;\">Cost: </span>
+					<input type=\"number\" id=\"energy_cost\" min=\"0\" max="${parseInt($("#energy_current").html()) * 10}" value=\"0\">
+					<div style="white-space: nowrap; color: white;">(${$("#energy_current").html()} Available)</div>
+				</div>`
+			);
+
+			if (activeDeck.deck[expandedCard].type == "ACTION" || activeDeck.deck[expandedCard].type == "GEOGAN") {
+				$("#brawl_overlay_buttons").append(
+					"<button onclick=\"playFromDeck()\">Use</button>"
+				);
+			} else if (activeDeck.deck[expandedCard].type == "HERO") {
+				$("#brawl_overlay_buttons").append(`
+					<button onclick=\"playFromDeck()\">Play Hero</button>`
+				);
+			} else if (activeDeck.deck[expandedCard].type == "BAKU-GEAR") {
+				$("#brawl_overlay_buttons").append(`
+					<button onclick=\"playFromDeck()\">Baku-Gear (${characters[selectedCharacter].gear1 ? characters[selectedCharacter].gear1.name : "Empty"})</button>
+				`);
+
+				if (characters[selectedCharacter].gear1) {
+					$("#brawl_overlay_buttons").append(`
+						<button onclick=\"playFromDeck(1)\">Dual-Gear (${characters[selectedCharacter].gear2 ? characters[selectedCharacter].gear2.name : "Empty"})</button>
+					`);
+				}
+			} else if (activeDeck.deck[expandedCard].type == "EVO") {
+				$("#brawl_overlay_buttons").append(`
+					<button onclick=\"playFromDeck()\">Evolve (${characters[selectedCharacter].evo ? characters[selectedCharacter].evo.name.replace(/\(.*/, "").trim() : "Empty"})</button>
+				`);
+			}
+			
+			$("#brawl_overlay_buttons").append(`
+				<button onclick=\"setOverlayButtons(39)\">Back</button>`
+			);
+
+			energyCostEvent();
+			break;
+		case 41: // Character select for revealed card
+			$("#brawl_overlay_buttons").append(`
+				<div style="display: flex; align-items: center; color: white;">Choose a Character: </div>`
+			);
+			if ((characters[0].faction == activeDeck.deck[expandedCard].faction && activeDeck.deck[expandedCard].type == "EVO") || activeDeck.deck[expandedCard].type == "BAKU-GEAR") {
+				$("#brawl_overlay_buttons").append(`
+					<button onclick="selectedCharacter = 0; setOverlayButtons(40);">Character 1 <img style="height: 20px;" src="assets/svg/BBP_${characters[0].faction}.svg" /></button>
+				`);
+			} 
+			if ((characters[1].faction == activeDeck.deck[expandedCard].faction && activeDeck.deck[expandedCard].type == "EVO") || activeDeck.deck[expandedCard].type == "BAKU-GEAR") {
+				$("#brawl_overlay_buttons").append(`
+					<button onclick="selectedCharacter = 1; setOverlayButtons(40);">Character 2 <img style="height: 20px;" src="assets/svg/BBP_${characters[1].faction}.svg" /></button>
+				`);
+			}
+			if ((characters[2].faction == activeDeck.deck[expandedCard].faction && activeDeck.deck[expandedCard].type == "EVO") || activeDeck.deck[expandedCard].type == "BAKU-GEAR") {
+				$("#brawl_overlay_buttons").append(`
+					<button onclick="selectedCharacter = 2; setOverlayButtons(40);">Character 3 <img style="height: 20px;" src="assets/svg/BBP_${characters[2].faction}.svg" /></button>
+				`);
+			}
+
+			$("#brawl_overlay_buttons").append(`
+				<button onclick="setOverlayButtons(39)">Back</button>`
+			);
+			break;
+		case 42: // energize revealed card
+			$("#brawl_overlay_buttons").append(`
+				<button onclick=\"energizeFromDeck(1)\">Energize\nCharged</button>
+				<button onclick=\"energizeFromDeck(0)\">Energize\nUncharged</button>
+				<button onclick=\"setOverlayButtons(39)\">Back</button>
+			`);
+			break;
+		case 43: // Return to deck revealed card
+			$("#brawl_overlay_buttons").append(`
+				<button onclick="deckFromReveal(1)">Top of Deck</button>
+				<button onclick="deckFromReveal()">Bottom of Deck</button>
+				<button onclick="deckFromReveal(3)">Shuffle</button>
+				<button onclick="setOverlayButtons(39)">Back</button>
+			`);
+			break;
 	}
 }
 
-function  setBackBehaviour(x = 0) {
+function deckFromReveal(pos) {
+	$("#brawl_overlay_buttons").children("button").prop("disabled", true);
+	let tempCard = activeDeck.deck.splice(expandedCard, 1)[0];
+
+	// add card to deck
+	if (pos == 1) {
+		activeDeck.deck.push(tempCard);
+	} else if (!pos) {
+		activeDeck.deck.unshift(tempCard);
+	} else {
+		// push card to deck then shuffle
+		activeDeck.deck.push(tempCard);
+		shuffleDeck();
+	}
+
+	hideOverlay();
+}
+
+function revealFromDeck() {
+	amountFromDeck = parseInt($("#deck_amnt_input").val());
+	if (amountFromDeck == 1) {
+		expandedCard = activeDeck.deck.length - 1;
+		$("#brawl_overlay_image").attr("src", buildCardPath(activeDeck.deck[expandedCard]));
+		setOverlayButtons(39);
+
+		// $("#brawl_overlay_buttons").append(`
+		// 	<button onclick="setOverlayButtons(27)">Back</button>
+		// `);
+	} else {
+
+	}
+}
+
+function playFromDeck(x = 0) {
+	$("#brawl_overlay_buttons").children("button").prop("disabled", true);
+
+	manageEnergy(4, parseInt($("#energy_cost").val()));
+
+	if (activeDeck.deck[expandedCard].type == "ACTION" || activeDeck.deck[expandedCard].type == "GEOGAN")
+		batch.push(activeDeck.deck[expandedCard]);
+	else if (activeDeck.deck[expandedCard].type == "HERO")
+		heros.push(activeDeck.deck[expandedCard]);
+	else if (activeDeck.deck[expandedCard].type == "BAKU-GEAR") {
+		if (x == 0) {
+			if (characters[selectedCharacter].gear1) {
+				discard.push(characters[selectedCharacter].gear1);
+			}
+			characters[selectedCharacter].gear1 = activeDeck.deck[expandedCard];
+		}
+		else if (x == 1) {
+			if (characters[selectedCharacter].gear2)
+				discard.push(characters[selectedCharacter].gear2);
+			characters[selectedCharacter].gear2 = activeDeck.deck[expandedCard];
+		}
+	}
+	else if (activeDeck.deck[expandedCard].type == "EVO") {
+		if (characters[selectedCharacter].evo)
+			discard.push(characters[selectedCharacter].evo);
+		characters[selectedCharacter].evo = activeDeck.deck[expandedCard];
+	}
+	
+	activeDeck.deck.splice(expandedCard, 1);
+
+	hideOverlay();
+}
+
+function setBackBehaviour(x = 0) {
 	if (x == 0)
 		$("#deck_overlay_menu button").attr("onclick", "setOverlayButtons(27);exitDeckSearch();");
 	else
@@ -1087,12 +1259,16 @@ function energizeFromDeck(charged, index = -1) {
 	hideOverlay();
 }
 
-
 function discardFromDeck(index = -1) {
 	// discard cards from deck equaling parsed amount in deck_amnt_input
 	amountFromDeck = parseInt($("#deck_amnt_input").val());
-	for (var i = 0; i < amountFromDeck; i++) {
-		discard.push(activeDeck.deck.pop());
+
+	if (index != -1)
+		discard.push(activeDeck.deck.splice(index, 1)[0]);
+	else {
+		for (var i = 0; i < amountFromDeck; i++) {
+			discard.push(activeDeck.deck.pop());
+		}
 	}
 	hideOverlay();
 }
