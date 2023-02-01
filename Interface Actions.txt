@@ -1,19 +1,9 @@
-make sure user cant do deck stuff after taking all damage
-indexes for keeping track of flipped cards is not working properly
-
 Deck:
-	1. Damage menu
-		*Send to discard (amount, maybe option for 1 or range. 
-		Should see each card before going to the next and have actions for it. 
-		Flip/fliphero!!). End if discard below 0
-		*Send to batch
-		*Draw to hand immediately after playing a flip
-		* Back
-	
 	5. Reveal [INPUT, def 1, MAX = deck size]
 		if 1, straight to card menu
 		else
-		show multi card selector click goes to menu. must keep track of indexes with array incase card moves
+		show multi card selector click goes to menu. must keep 
+		track of indexes with array incase card moves
 
 Deck (Brainstorming):
 	*View a certain amount of cards from top of deck and put them back (top, bottom, random)
