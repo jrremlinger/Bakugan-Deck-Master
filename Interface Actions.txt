@@ -1,3 +1,6 @@
+make sure user cant do deck stuff after taking all damage
+indexes for keeping track of flipped cards is not working properly
+
 Deck:
 	1. Damage menu
 		*Send to discard (amount, maybe option for 1 or range. 
