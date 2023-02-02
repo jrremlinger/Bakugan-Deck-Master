@@ -1,3 +1,6 @@
+Deck:
+	*Reordering from reveal menu does not work with mouse dragging, only touch gestures. Must support both.
+	
 Characters:
 	*Allow for enemy controlled baku-gear. Have header button to display enemy gear menu
 	
@@ -10,7 +13,7 @@ Misc:
 	*Constantly keep track of game-state in localStorage to continue match if page is refreshed
 	*Make the character gear menu fit the display dynamically
 
-Deck: COMPLETE
+
 Hand: COMPLETE
 Hero: COMPLETE
 Batch: COMPLETE
