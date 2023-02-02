@@ -22,6 +22,7 @@ Evolutions 2:
 	59 - Diamond Dragonoid
 	62 - Diamond Platinum Neo Trox
 	118 - Darkus Platinum Montrapod
+	(Additionally missing random cards, the wiki skips several numbers)
 	
 Legends:
 	1 - Scorching Swords
