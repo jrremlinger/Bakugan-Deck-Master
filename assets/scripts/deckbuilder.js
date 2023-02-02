@@ -75,7 +75,7 @@ function deckBuilder() {
 
 	// Check which sets should be shown
 	let sets = [];
-	for (let i = 1; i < 11; i++) {
+	for (let i = 1; i < 12; i++) {
 		if (document.getElementById("filter_bar_sets_checkbox_" + i).checked) {
 			sets.push(document.getElementById("filter_bar_sets_checkbox_" + i).value);
 		}
@@ -85,7 +85,7 @@ function deckBuilder() {
 	if (document.getElementById("search_bar_checkbox").checked) {
 		factions = [ "AQUOS", "AURELUS", "DARKUS", "HAOS", "PYRUS", "VENTUS" ];
 		types = [ "ACTION", "FLIP", "FLIP HERO", "HERO", "BAKU-GEAR", "GEOGAN", "EVO"  ];
-		sets = [ "BB", "BR", "AA", "AV", "FF", "SV", "GG", "EV", "EV2", "LE" ];
+		sets = [ "BB", "BR", "AA", "AV", "FF", "SV", "SG", "GG", "EV", "EV2", "LE" ];
 	}
 
 	// Check which cards should be shown by checking the factions, types, and sets arrays

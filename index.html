@@ -204,6 +204,7 @@
 		<!-- Check boxes to filter which bakugan factions should be shown and also filter by card type -->
 		<div id="filter_bar">
 			<div id="filter_bar_factions">
+				<label for="filter_bar_factions">Factions: </label>
 				<input type="checkbox" class="filtercheckbox" id="filter_bar_factions_checkbox_1" name="filter_bar_factions_checkbox_1" value="AQUOS">
 				<label for="filter_bar_factions_checkbox_1">Aquos</label>
 				<input type="checkbox" class="filtercheckbox" id="filter_bar_factions_checkbox_2" name="filter_bar_factions_checkbox_2" value="AURELUS">
@@ -218,6 +219,7 @@
 				<label for="filter_bar_factions_checkbox_6">Ventus</label>
 			</div>
 			<div id="filter_bar_card_types">
+				<label for="filter_bar_card_types">Card Types: </label>
 				<input type="checkbox" class="filtercheckbox" id="filter_bar_types_checkbox_1" name="filter_bar_types_checkbox_1" value="ACTION">
 				<label for="filter_bar_types_checkbox_1">Action</label>
 				<input type="checkbox" class="filtercheckbox" id="filter_bar_types_checkbox_2" name="filter_bar_types_checkbox_2" value="FLIP">
@@ -235,26 +237,40 @@
 			</div>
 			<!-- Check boxes to filter by set name -->
 			<div id="filter_bar_card_sets">
+				<label for="filter_bar_card_sets">Card Sets: </label>
+				
 				<input type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_1" name="filter_bar_sets_checkbox_1" value="BB" checked>
 				<label for="filter_bar_sets_checkbox_1">Battle Brawlers</label>
+				
 				<input type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_2" name="filter_bar_sets_checkbox_2" value="BR" checked>
 				<label for="filter_bar_sets_checkbox_2">Bakugan Resurgence</label>
+				
 				<input type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_3" name="filter_bar_sets_checkbox_3" value="AA" checked>
 				<label for="filter_bar_sets_checkbox_3">Age of Aurelus</label>
+				
 				<input type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_4" name="filter_bar_sets_checkbox_4" value="AV" checked>
 				<label for="filter_bar_sets_checkbox_4">Armored Elite</label>
+				
 				<input type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_5" name="filter_bar_sets_checkbox_5" value="FF" checked>
 				<label for="filter_bar_sets_checkbox_5">Fusion Force</label>
-				<input style="display: none;" type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_6" name="filter_bar_sets_checkbox_6" value="SV" checked>
-				<label style="display: none;" for="filter_bar_sets_checkbox_6">Shields of Vestroia</label>
-				<input style="display: none;" type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_7" name="filter_bar_sets_checkbox_7" value="GG" checked>
-				<label style="display: none;" for="filter_bar_sets_checkbox_7">Geogan Rising</label>
-				<input type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_8" name="filter_bar_sets_checkbox_8" value="EV" checked>
-				<label for="filter_bar_sets_checkbox_8">Evolutions</label>
-				<input style="display: none;" type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_9" name="filter_bar_sets_checkbox_9" value="EV2" checked>
-				<label style="display: none;" for="filter_bar_sets_checkbox_9">Evolutions 2</label>
-				<input style="display: none;" type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_10" name="filter_bar_sets_checkbox_10" value="Legends" checked>
-				<label style="display: none;" for="filter_bar_sets_checkbox_10">Legends</label>
+				
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_6" name="filter_bar_sets_checkbox_6" value="SV" checked>
+				<label style="color: red;" for="filter_bar_sets_checkbox_6">Shields of Vestroia (INCOMPLETE)</label>
+				
+				<input style="display: none;" type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_7" name="filter_bar_sets_checkbox_7" value="SG" checked>
+				<label style="display: none; color: red;" for="filter_bar_sets_checkbox_7">Secrets of the Geogan (INCOMPLETE)</label>
+				
+				<input style="display: none;" type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_8" name="filter_bar_sets_checkbox_8" value="GG" checked>
+				<label style="display: none; color: red;" for="filter_bar_sets_checkbox_8">Geogan Rising (INCOMPLETE)</label>
+				
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_9" name="filter_bar_sets_checkbox_9" value="EV" checked>
+				<label for="filter_bar_sets_checkbox_9">Evolutions</label>
+				
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_10" name="filter_bar_sets_checkbox_10" value="EV2" checked>
+				<label style="color: red;" for="filter_bar_sets_checkbox_10">Evolutions 2 (INCOMPLETE)</label>
+				
+				<input type="checkbox" class="filtercheckbox" id="filter_bar_sets_checkbox_11" name="filter_bar_sets_checkbox_11" value="LE" checked>
+				<label style="color: red;" for="filter_bar_sets_checkbox_11">Legends (INCOMPLETE)</label>
 			</div>
 		</div>
 		<!-- Show list of all cards able to be put into the deck -->

@@ -24,6 +24,9 @@ with open("assets/scripts/generate_card_db.js", "w") as out_file:
         # use the os.listdir() function to get a list of all files in the directory
         # sort the list of filenames using the natsort package
         for filename in natsorted(os.listdir(directory)):
+            # if file is thumbnail folder, skip it
+            if filename == "thumbnail":
+                continue
             # remove the last 4 characters from the file name
             filename = filename[:-4]
             # split the file name by underscore

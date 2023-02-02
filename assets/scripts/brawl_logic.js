@@ -341,12 +341,12 @@ function setOverlayButtons(x = 0) {
 			);
 
 			$("#brawl_overlay_buttons").append(`
-				<button onclick=\"gearFromHand(0, 0)\">Baku-Gear (${characters[0].gear1 ? characters[0].gear1.name : "Empty"})</button>
+				<button onclick=\"gearFromHand(0, 0)\">Baku-Gear (${characters[0].gear1 ? characters[0].gear1.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 			`);
 
 			if (characters[0].gear1) {
 				$("#brawl_overlay_buttons").append(`
-					<button onclick=\"gearFromHand(0, 1)\">Dual-Gear (${characters[0].gear2 ? characters[0].gear2.name : "Empty"})</button>
+					<button onclick=\"gearFromHand(0, 1)\">Dual-Gear (${characters[0].gear2 ? characters[0].gear2.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 				`);
 			}
 
@@ -365,12 +365,12 @@ function setOverlayButtons(x = 0) {
 			);
 
 			$("#brawl_overlay_buttons").append(`
-				<button onclick=\"gearFromHand(1, 0)\">Baku-Gear (${characters[1].gear1 ? characters[1].gear1.name : "Empty"})</button>
+				<button onclick=\"gearFromHand(1, 0)\">Baku-Gear (${characters[1].gear1 ? characters[1].gear1.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 			`);
 
 			if (characters[1].gear1) {
 				$("#brawl_overlay_buttons").append(`
-					<button onclick=\"gearFromHand(1, 1)\">Dual-Gear (${characters[1].gear2 ? characters[1].gear2.name : "Empty"})</button>
+					<button onclick=\"gearFromHand(1, 1)\">Dual-Gear (${characters[1].gear2 ? characters[1].gear2.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 				`);
 			}
 
@@ -389,12 +389,12 @@ function setOverlayButtons(x = 0) {
 			);
 
 			$("#brawl_overlay_buttons").append(`
-				<button onclick=\"gearFromHand(2, 0)\">Baku-Gear (${characters[2].gear1 ? characters[2].gear1.name : "Empty"})</button>
+				<button onclick=\"gearFromHand(2, 0)\">Baku-Gear (${characters[2].gear1 ? characters[2].gear1.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 			`);
 
 			if (characters[2].gear1) {
 				$("#brawl_overlay_buttons").append(`
-					<button onclick=\"gearFromHand(2, 1)\">Dual-Gear (${characters[2].gear2 ? characters[2].gear2.name : "Empty"})</button>
+					<button onclick=\"gearFromHand(2, 1)\">Dual-Gear (${characters[2].gear2 ? characters[2].gear2.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 				`);
 			}
 
@@ -619,12 +619,12 @@ function setOverlayButtons(x = 0) {
 				);
 			} else if (discard[expandedCard].type == "BAKU-GEAR") {
 				$("#brawl_overlay_buttons").append(`
-					<button onclick=\"playFromDiscard()\">Baku-Gear (${characters[selectedCharacter].gear1 ? characters[selectedCharacter].gear1.name : "Empty"})</button>
+					<button onclick=\"playFromDiscard()\">Baku-Gear (${characters[selectedCharacter].gear1 ? characters[selectedCharacter].gear1.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 				`);
 
 				if (characters[selectedCharacter].gear1) {
 					$("#brawl_overlay_buttons").append(`
-						<button onclick=\"playFromDiscard(1)\">Dual-Gear (${characters[selectedCharacter].gear2 ? characters[selectedCharacter].gear2.name : "Empty"})</button>
+						<button onclick=\"playFromDiscard(1)\">Dual-Gear (${characters[selectedCharacter].gear2 ? characters[selectedCharacter].gear2.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 					`);
 				}
 			} else if (discard[expandedCard].type == "EVO") {
@@ -781,12 +781,12 @@ function setOverlayButtons(x = 0) {
 				);
 			} else if (discard[expandedCard].type == "BAKU-GEAR") {
 				$("#brawl_overlay_buttons").append(`
-					<button onclick=\"playFromDiscard(0, 1)\">Baku-Gear (${characters[selectedCharacter].gear1 ? characters[selectedCharacter].gear1.name : "Empty"})</button>
+					<button onclick=\"playFromDiscard(0, 1)\">Baku-Gear (${characters[selectedCharacter].gear1 ? characters[selectedCharacter].gear1.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 				`);
 
 				if (characters[selectedCharacter].gear1) {
 					$("#brawl_overlay_buttons").append(`
-						<button onclick=\"playFromDiscard(1, 1)\">Dual-Gear (${characters[selectedCharacter].gear2 ? characters[selectedCharacter].gear2.name : "Empty"})</button>
+						<button onclick=\"playFromDiscard(1, 1)\">Dual-Gear (${characters[selectedCharacter].gear2 ? characters[selectedCharacter].gear2.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 					`);
 				}
 			} else if (discard[expandedCard].type == "EVO") {
@@ -878,12 +878,12 @@ function setOverlayButtons(x = 0) {
 				);
 			} else if (discard[expandedCard].type == "BAKU-GEAR") {
 				$("#brawl_overlay_buttons").append(`
-					<button onclick=\"playFromDiscard(0, 1)\">Baku-Gear (${characters[selectedCharacter].gear1 ? characters[selectedCharacter].gear1.name : "Empty"})</button>
+					<button onclick=\"playFromDiscard(0, 1)\">Baku-Gear (${characters[selectedCharacter].gear1 ? characters[selectedCharacter].gear1.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 				`);
 
 				if (characters[selectedCharacter].gear1) {
 					$("#brawl_overlay_buttons").append(`
-						<button onclick=\"playFromDiscard(1, 1)\">Dual-Gear (${characters[selectedCharacter].gear2 ? characters[selectedCharacter].gear2.name : "Empty"})</button>
+						<button onclick=\"playFromDiscard(1, 1)\">Dual-Gear (${characters[selectedCharacter].gear2 ? characters[selectedCharacter].gear2.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 					`);
 				}
 			} else if (discard[expandedCard].type == "EVO") {
@@ -976,12 +976,12 @@ function setOverlayButtons(x = 0) {
 				);
 			} else if (activeDeck.deck[expandedCard].type == "BAKU-GEAR") {
 				$("#brawl_overlay_buttons").append(`
-					<button onclick=\"playFromDeck()\">Baku-Gear (${characters[selectedCharacter].gear1 ? characters[selectedCharacter].gear1.name : "Empty"})</button>
+					<button onclick=\"playFromDeck()\">Baku-Gear (${characters[selectedCharacter].gear1 ? characters[selectedCharacter].gear1.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 				`);
 
 				if (characters[selectedCharacter].gear1) {
 					$("#brawl_overlay_buttons").append(`
-						<button onclick=\"playFromDeck(1)\">Dual-Gear (${characters[selectedCharacter].gear2 ? characters[selectedCharacter].gear2.name : "Empty"})</button>
+						<button onclick=\"playFromDeck(1)\">Dual-Gear (${characters[selectedCharacter].gear2 ? characters[selectedCharacter].gear2.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 					`);
 				}
 			} else if (activeDeck.deck[expandedCard].type == "EVO") {
@@ -1080,12 +1080,12 @@ function setOverlayButtons(x = 0) {
 				);
 			} else if (revealedCards[expandedCard].type == "BAKU-GEAR") {
 				$("#brawl_overlay_buttons").append(`
-					<button onclick=\"playFromRevealed()\">Baku-Gear (${characters[selectedCharacter].gear1 ? characters[selectedCharacter].gear1.name : "Empty"})</button>
+					<button onclick=\"playFromRevealed()\">Baku-Gear (${characters[selectedCharacter].gear1 ? characters[selectedCharacter].gear1.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 				`);
 
 				if (characters[selectedCharacter].gear1) {
 					$("#brawl_overlay_buttons").append(`
-						<button onclick=\"playFromRevealed(1)\">Dual-Gear (${characters[selectedCharacter].gear2 ? characters[selectedCharacter].gear2.name : "Empty"})</button>
+						<button onclick=\"playFromRevealed(1)\">Dual-Gear (${characters[selectedCharacter].gear2 ? characters[selectedCharacter].gear2.name.replace(/\(.*/, "").trim() : "Empty"})</button>
 					`);
 				}
 			} else if (revealedCards[expandedCard].type == "EVO") {
