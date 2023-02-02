@@ -226,7 +226,7 @@ for (let i = 0; i < card_db.length; i++) {
 			card_db[i].type = "BAKU-GEAR";
 		else if (card_db[i].setNumber <= 206)
 			card_db[i].type = "GEOGAN";
-		else if (card_db[i].setNumber <= 225)
+		else if (card_db[i].setNumber <= 225 || card_db[i].setNumber == 325)
 			card_db[i].type = "EVO";
 
 		// Set card factions
@@ -234,7 +234,7 @@ for (let i = 0; i < card_db.length; i++) {
 			card_db[i].faction = [ "AQUOS" ];
 		if ((card_db[i].setNumber >= 13 && card_db[i].setNumber <= 25) || card_db[i].setNumber == 107 || (card_db[i].setNumber >= 178 && card_db[i].setNumber <= 188) || card_db[i].setNumber == 199 || card_db[i].setNumber == 214)
 			card_db[i].faction = [ "DARKUS" ];
-		if ((card_db[i].setNumber >= 26 && card_db[i].setNumber <= 30) || card_db[i].setNumber == 109 || (card_db[i].setNumber >= 189 && card_db[i].setNumber <= 193) || (card_db[i].setNumber >= 217 && card_db[i].setNumber <= 218))
+		if ((card_db[i].setNumber >= 26 && card_db[i].setNumber <= 30) || card_db[i].setNumber == 109 || (card_db[i].setNumber >= 189 && card_db[i].setNumber <= 193) || (card_db[i].setNumber >= 217 && card_db[i].setNumber <= 218) || card_db[i].setNumber == 325)
 			card_db[i].faction = [ "HAOS" ];
 		if ((card_db[i].setNumber >= 36 && card_db[i].setNumber <= 49) || card_db[i].setNumber == 113 || (card_db[i].setNumber >= 195 && card_db[i].setNumber <= 196) || card_db[i].setNumber == 200 || card_db[i].setNumber == 221)
 			card_db[i].faction = [ "PYRUS" ];
