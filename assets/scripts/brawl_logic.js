@@ -187,7 +187,6 @@ function createListeners() {
 		expandedCard = $(this).index("#brawl_hand_column > *");
 
 		setOverlayButtons(0);
-		$("#brawl_overlay_image").removeClass("enemy_hero");
 
 		// Set the card overlay image to the card that was clicked without the /thumbnail/thumb_ part
 		$("#brawl_overlay_image").attr("src", buildCardPath(hand[expandedCard], true));
@@ -227,7 +226,6 @@ function createListeners() {
 	$(".batch_expandable").click(function() {
 		expandedCard = $(this).index("#brawl_batch > *");
 		setOverlayButtons(13);
-		$("#brawl_overlay_image").removeClass("enemy_hero");
 
 		$("#brawl_overlay_image").attr("src", buildCardPath(batch[expandedCard], true));
 		$("#brawl_overlay").show();
@@ -547,6 +545,7 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<div style="color: white;">${characters[expandedCharacter].evo.name.replace(/\(.*/, "").trim()}</div>
 				<button onclick=\"handFromCharacter()\">Send to Hand</button>
+				<button onclick=\"setOverlayButtons(49)\">Energize</button>
 				<button onclick=\"discardFromCharacter()\">Destroy Evo</button>
 			`);
 			break;
@@ -554,6 +553,7 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<div style="color: white;">${characters[expandedCharacter].gear1.name.replace(/\(.*/, "").trim()}</div>
 				<button onclick=\"handFromCharacter(1)\">Send to Hand</button>
+				<button onclick=\"setOverlayButtons(50)\">Energize</button>
 				<button onclick=\"discardFromCharacter(1)\">Destroy Baku-Gear</button>
 			`);
 			break;
@@ -561,6 +561,7 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<div style="color: white;">${characters[expandedCharacter].gear2.name.replace(/\(.*/, "").trim()}</div>
 				<button onclick=\"handFromCharacter(2)\">Send to Hand</button>
+				<button onclick=\"setOverlayButtons(51)\">Energize</button>
 				<button onclick=\"discardFromCharacter(2)\">Destroy Dual-Gear</button>
 			`);
 			break;
@@ -1136,6 +1137,27 @@ function setOverlayButtons(x = 0) {
 				<button onclick="setOverlayButtons(44)">Back</button>
 			`);
 			break;
+		case 49: // Character evo energize menu
+			$("#brawl_overlay_buttons").append(`
+				<button onclick=\"energizeFromCharacter(0, 1)\">Energize\nCharged</button>
+				<button onclick=\"energizeFromCharacter(0, 0)\">Energize\nUncharged</button>
+				<button onclick="setOverlayButtons(18)">Back</button>
+			`);
+			break;
+		case 50: // Character gear energize menu
+			$("#brawl_overlay_buttons").append(`
+				<button onclick=\"energizeFromCharacter(1, 1)\">Energize\nCharged</button>
+				<button onclick=\"energizeFromCharacter(1, 0)\">Energize\nUncharged</button>
+				<button onclick="setOverlayButtons(19)">Back</button>
+			`);
+			break;
+		case 51: // Character dual-gear energize menu
+			$("#brawl_overlay_buttons").append(`
+				<button onclick=\"energizeFromCharacter(2, 1)\">Energize\nCharged</button>
+				<button onclick=\"energizeFromCharacter(2, 0)\">Energize\nUncharged</button>
+				<button onclick="setOverlayButtons(20)">Back</button>
+			`);
+			break;
 	}
 }
 
@@ -1625,6 +1647,27 @@ function playFromDiscard(x = 0, y = 0) {
 	}
 }
 
+function energizeFromCharacter(x = 0, charged = 0) {
+	$("#brawl_overlay_buttons").children("button").prop("disabled", true);
+
+	manageEnergy(2);
+	if (charged > 0) {
+		manageEnergy(0);
+	}
+
+	if (x == 0) {
+		characters[expandedCharacter].evo = null;
+	} else if (x == 1) {
+		characters[expandedCharacter].gear1 = null;
+	}
+	else if (x == 2) {
+		characters[expandedCharacter].gear2 = null;
+	}
+
+	characterOverlay(expandedCharacter);
+	updateUI();
+}
+
 function discardFromCharacter(x = 0) {
 	$("#brawl_overlay_buttons").children("button").prop("disabled", true);
 
@@ -1639,6 +1682,7 @@ function discardFromCharacter(x = 0) {
 		characters[expandedCharacter].gear2 = null;
 	}
 
+	characterOverlay(expandedCharacter);
 	updateUI();
 }
 
@@ -1656,6 +1700,7 @@ function handFromCharacter(x = 0) {
 		characters[expandedCharacter].gear2 = null;
 	}
 
+	characterOverlay(expandedCharacter);
 	updateUI();
 }
 
@@ -2063,6 +2108,8 @@ function discardChangeSelected(x = 0) {
 }
 
 function hideOverlay() {
+	$("#brawl_overlay_image").removeClass("enemy_hero");
+
 	if (revealedCards.length > 0) {
 		for (var i = 0; i < revealedCards.length; i++) {
 			activeDeck.deck.push(revealedCards[i]);
