@@ -72,6 +72,7 @@
 /* Make all images withing card_list_cards take up the less space without editing image height */
 #card_list_cards img {
 	max-height: 200px;
+	height: 200px;
 	margin: 20px;
 }
 
@@ -114,6 +115,7 @@ body {
     object-fit: contain; */
 	max-width: 50%;
     max-height: 70%;
+    height: 70%;
     object-fit: contain;
 }
 
