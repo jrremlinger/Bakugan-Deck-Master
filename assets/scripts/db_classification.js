@@ -1,4 +1,4 @@
-let card_db = [...Array(1258)].map(() => ({}));
+let card_db = [...Array(1259)].map(() => ({}));
 populateCardDB()
 
 // Init values to prevent errors
@@ -345,7 +345,7 @@ for (let i = 0; i < card_db.length; i++) {
 			card_db[i].faction = [ "VENTUS" ];
 		if ((card_db[i].setNumber >= 9 && card_db[i].setNumber <= 10) || card_db[i].setNumber == 17)
 			card_db[i].faction = [ "PYRUS" ];
-		if (card_db[i].setNumber == 11)
+		if (card_db[i].setNumber == 7 || card_db[i].setNumber == 11)
 			card_db[i].faction = [ "DARKUS" ];
 		if (card_db[i].setNumber >= 13 && card_db[i].setNumber <= 15)
 			card_db[i].faction = [ "AURELUS" ];
