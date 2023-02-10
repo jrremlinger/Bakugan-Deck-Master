@@ -576,11 +576,11 @@ function setOverlayButtons(x = 0) {
 			`);
 			break;
 		case 22: // Discard card menu
-			if (discard[expandedCard].type == "ACTION" || discard[expandedCard].type == "GEOGAN") {
+			if (discard[expandedCard].type == "ACTION" || discard[expandedCard].type == "GEOGAN" || discard[expandedCard].type == "FLIP") {
 				$("#brawl_overlay_buttons").append(
 					"<button onclick=\"setOverlayButtons(23)\">Use</button>"
 				);
-			} else if (discard[expandedCard].type == "HERO") {
+			} else if (discard[expandedCard].type == "HERO" || discard[expandedCard].type == "FLIP HERO") {
 				$("#brawl_overlay_buttons").append(
 					"<button onclick=\"setOverlayButtons(23)\">Play Hero</button>"
 				);
@@ -610,11 +610,11 @@ function setOverlayButtons(x = 0) {
 				</div>`
 			);
 
-			if (discard[expandedCard].type == "ACTION" || discard[expandedCard].type == "GEOGAN") {
+			if (discard[expandedCard].type == "ACTION" || discard[expandedCard].type == "GEOGAN" || discard[expandedCard].type == "FLIP") {
 				$("#brawl_overlay_buttons").append(
 					"<button onclick=\"playFromDiscard()\">Use</button>"
 				);
-			} else if (discard[expandedCard].type == "HERO") {
+			} else if (discard[expandedCard].type == "HERO" || discard[expandedCard].type == "FLIP HERO") {
 				$("#brawl_overlay_buttons").append(`
 					<button onclick=\"playFromDiscard()\">Play Hero</button>`
 				);
