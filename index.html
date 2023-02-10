@@ -53,6 +53,16 @@
 				</div>
 			</div>
 
+			<div id="db_overlay" style="display: none;">
+				<div id="db_overlay_cards"></div>
+				<div id="db_overlay_menu">
+					<div id="db_overlay_title">Card DB Search</div>
+					<input type="text" id="db_search_text">
+					<button onclick="cardDBSearch();">Search</button>
+					<button onclick="hideOverlay();">Back</button>
+				</div>
+			</div>
+
 			<div id="character_container" style="display: none;">
 				<img class="overlay_cc" id="cc_evo" onclick="setOverlayButtons(18)" src="assets/cards/BBPCC-Dark.png" />
 				<img class="overlay_cc" id="cc_gear1" onclick="setOverlayButtons(19)" src="assets/cards/BBPAC.png" />
@@ -66,8 +76,9 @@
 				<button id="header_bar_button_hide" onclick="$('#brawl_ui').hide(); $('#menu_main').show();">Exit</button>
 			</div>
 			<div id="brawl_header_end">
-				<button id="button_reset" onclick="resetBrawl()">Reset</button>
+				<button id="button_card_db" onclick="cardDBMenu()">Draw from DB</button>
 				<button id="button_clear_batch" onclick="clearBatch()">Clear Batch</button>
+				<button id="button_reset" onclick="resetBrawl()">Reset</button>
 			</div>
 		</div>
 		<div class="brawl_row" id="brawl_batch">

@@ -726,8 +726,12 @@ function setOverlayButtons(x = 0) {
 			$("#brawl_overlay_buttons").append(`
 				<div style="color: white;">Remaining cards: ${activeDeck.deck.length}</div>
 				<div style="color: white;">Damage Taken: ${damageTaken}</div>
-				<button onclick="takeDamage();">Flip Card</button>
 			`);
+			if (activeDeck.deck.length > 0) {
+				$("#brawl_overlay_buttons").append(`
+					<button onclick="takeDamage();">Flip Card</button>
+				`);
+			}
 			if (flippedCards.length > 0) {
 				$("#brawl_overlay_buttons").append(`
 					<button onclick="setBackBehaviour(1);searchDeck(1);">View Flipped Cards</button>
@@ -1158,6 +1162,11 @@ function setOverlayButtons(x = 0) {
 				<button onclick="setOverlayButtons(20)">Back</button>
 			`);
 			break;
+		case 52: // Card DB select card
+			$("#brawl_overlay_buttons").append(`
+				<button onclick="cardDBDraw();">Add to Hand</button>
+				<button onclick="cardDBMenu();">Back</button>
+			`);
 	}
 }
 
@@ -2128,6 +2137,7 @@ function hideOverlay() {
 		$("#discard_overlay").hide();
 		$("#deck_overlay").hide();
 		$("#reveal_overlay").hide();
+		$("#db_overlay").hide();
 		$("#character_container").hide();
 		$("#brawl_overlay_image").show();
 		$("#brawl_overlay_buttons").show();
@@ -2199,4 +2209,56 @@ function revealFromHand() {
 	$(".hand_expandable").each(function() {
 		$(this).attr("src", "assets/cards/BBPAC.png");
 	});
+}
+
+function cardDBMenu() {
+	$("#db_overlay").show();
+	$("#deck_overlay").hide();
+	$("#brawl_overlay_buttons").hide();
+	$("#reveal_overlay").hide();
+	$("#discard_overlay").hide();
+	$("#brawl_overlay_image").hide();
+
+	$("#brawl_overlay").show();
+	$("#brawl_overlay").css("opacity", 1);
+	$("#brawl_overlay").click(function(event) {
+		if (event.target == this) {
+			hideOverlay();
+		}
+	});
+}
+
+function cardDBSearch() {
+	let searchMatchCards = [];
+	let search = $("#db_search_text").val();
+
+	for (let i = 0; i < card_db.length; i++) {
+		if (card_db[i].name.toLowerCase().includes(search.toLowerCase())) {
+			searchMatchCards.push(card_db[i]);
+		}
+	}
+
+	$("#db_overlay_cards").empty();
+	for (var i = 0; i < searchMatchCards.length; i++) {
+		$("#db_overlay_cards").append(`
+			<img src=\"${buildCardPath(searchMatchCards[i])}" />
+		`);
+	}
+
+	//add click event to each card
+	$("#db_overlay_cards").children("img").click(function() {
+		// find index of searchMatchCards[i] in card_db
+		expandedCard = card_db.indexOf(searchMatchCards[$(this).index()]);
+
+		$("#brawl_overlay_image").attr("src", buildCardPath(card_db[expandedCard], true));
+		$("#brawl_overlay_image").show();
+		$("#brawl_overlay_buttons").show();
+		setOverlayButtons(52);
+		$("#db_overlay").hide();
+	});
+}
+
+function cardDBDraw() {
+	hand.push(card_db[expandedCard]);
+	hideOverlay();
 }
