@@ -1,4 +1,4 @@
-let card_db = [...Array(1259)].map(() => ({}));
+let card_db = [...Array(1263)].map(() => ({}));
 populateCardDB()
 
 // Init values to prevent errors
@@ -44,7 +44,7 @@ for (let i = 0; i < card_db.length; i++) {
 			card_db[i].type = "FLIP";
 		else if (card_db[i].setNumber <= 84)
 			card_db[i].type = "HERO";
-		else if (card_db[i].setNumber <= 165)
+		else if (card_db[i].setNumber <= 166)
 			card_db[i].type = "EVO";
 
 		// Set card factions
@@ -60,6 +60,8 @@ for (let i = 0; i < card_db.length; i++) {
 			card_db[i].faction = [ "PYRUS" ];
 		if ((card_db[i].setNumber >= 48 && card_db[i].setNumber <= 59) || (card_db[i].setNumber >= 74 && card_db[i].setNumber <= 76) || card_db[i].setNumber == 84 || (card_db[i].setNumber >= 150 && card_db[i].setNumber <= 165))
 			card_db[i].faction = [ "VENTUS" ];
+		if (card_db[i].setNumber == 166)
+			card_db[i].faction = [ "PYRUS" ];
 	}
 
 	if (card_db[i].set == "AA") {
@@ -142,6 +144,8 @@ for (let i = 0; i < card_db.length; i++) {
 			card_db[i].type = "BAKU-GEAR";
 		else if (card_db[i].setNumber <= 149)
 			card_db[i].type = "EVO";
+		else if (card_db[i].setNumber <= 152)
+			card_db[i].type = "BAKU-GEAR";
 
 		// Set card factions
 		if (card_db[i].setNumber <= 8 || (card_db[i].setNumber >= 67 && card_db[i].setNumber <= 68) || card_db[i].setNumber == 87 || (card_db[i].setNumber >= 97 && card_db[i].setNumber <= 98) || card_db[i].setNumber == 124 || (card_db[i].setNumber >= 126 && card_db[i].setNumber <= 127))
@@ -168,6 +172,12 @@ for (let i = 0; i < card_db.length; i++) {
 			card_db[i].faction = [ "VENTUS", "HAOS" ];
 		if ((card_db[i].setNumber >= 62 && card_db[i].setNumber <= 66) || (card_db[i].setNumber >= 85 && card_db[i].setNumber <= 86) || card_db[i].setNumber == 96 || (card_db[i].setNumber >= 121 && card_db[i].setNumber <= 123) || card_db[i].setNumber == 125)
 			card_db[i].faction = [ "AQUOS", "VENTUS" ];
+		if (card_db[i].setNumber == 150)
+			card_db[i].faction = [ "AQUOS", "AURELUS" ];
+		if (card_db[i].setNumber == 151)
+			card_db[i].faction = [ "VENTUS", "AURELUS" ];
+		if (card_db[i].setNumber == 152)
+			card_db[i].faction = [ "PYRUS", "AURELUS" ];
 	}
 
 	if (card_db[i].set == "SV") {
