@@ -7,8 +7,6 @@ Misc:
 	*Refactor code, way too many functions that can be consolidated
 	*Constantly keep track of game-state in localStorage to continue match if page is refreshed
 	*Make the character gear menu fit the display dynamically
-	*Low quality cards POSSIBLY may be scaled incorrectly in some areas
-
 
 Hand: COMPLETE
 Hero: COMPLETE
