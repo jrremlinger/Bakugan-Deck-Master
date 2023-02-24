@@ -343,7 +343,7 @@ body {
 	/* transform: translate(-50%, -50%); */
 	/* max-height: 60%; */
 	max-width: 50%;
-    max-height: 70%;
+    height: 70%;
     object-fit: contain;
 }
 
@@ -442,7 +442,7 @@ button {
 
 .overlay_cc {
     max-width: 25vw;
-    max-height: 55vh;
+    height: 55vh;
     object-fit: contain;
 	padding: 3px;
 }
@@ -476,7 +476,7 @@ button {
 
 	#brawl_overlay_image, #card_overlay img {
 		max-width: 70%;
-		max-height: 50%;
+		height: 50%;
 	}
 
 	#brawl_overlay {
