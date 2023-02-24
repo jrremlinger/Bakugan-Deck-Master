@@ -1,3 +1,6 @@
+Characters:
+	*If a player has a two and one faction spread, the app can't tell which faction is doubled. This will cause issues with playing EVO's
+
 Energy:
 	*Energized cards must be kept track of because they can be discarded and played from there
 
