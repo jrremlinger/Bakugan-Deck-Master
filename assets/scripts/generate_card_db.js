@@ -5051,4 +5051,8 @@ card_db[1262].name = "Dragonoid x Tretorous (Diamond Card)";
 card_db[1262].set = "LE";
 card_db[1262].rarity = "RA";
 card_db[1262].setNumber = "19";
+card_db[1263].name = "Nova Dragonoid x Nillious (Diamond Card)";
+card_db[1263].set = "LE";
+card_db[1263].rarity = "RA";
+card_db[1263].setNumber = "20";
 }
