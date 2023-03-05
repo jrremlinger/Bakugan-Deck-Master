@@ -18,5 +18,23 @@ function isValidDeck(deck) {
 		flag = false;
 	}
 
+	// Make sure deck has no more than 3 copies of a single card
+	let cardCounts = {};
+	for (let card of deck) {
+		let cardString = JSON.stringify(card);
+		if (cardCounts[cardString]) {
+			cardCounts[cardString]++;
+		} else {
+			cardCounts[cardString] = 1;
+		}
+	}
+
+	for (let count of Object.values(cardCounts)) {
+		if (count > 3) {
+			flag = false;
+			break;
+		}
+	}
+
 	return flag;
 }
