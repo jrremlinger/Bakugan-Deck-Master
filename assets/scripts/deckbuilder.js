@@ -308,6 +308,73 @@ $("#header_bar_button_delete").click(function() {
 	}
 });
 
+// Open import export menu
+$("#header_bar_button_port").click(function() {
+	$("#menu_deck_builder").hide();
+
+	//create a string of text consisting of the pattern setnumber setname with no spaces and commas to separate
+	let deckString = "";
+	for (let i = 0; i < deck.length; i++) {
+		deckString += deck[i].setNumber + " " + deck[i].set;
+		if (i != deck.length - 1) {
+			deckString += ",";
+		}
+	}
+
+	$("#menu_deck_port_textbox_text").val(deckString);
+	$("#menu_deck_port").show();
+});
+
+// Save deck from textbox string
+$("#menu_deck_port_buttons_save").click(function() {
+	const deckString = $("#menu_deck_port_textbox_text").val();
+	const deckList = deckString.split(",");
+
+	// Clear current deck
+	deck = [];
+
+	// Loop through deck list and add cards to deck array
+	for (let i = 0; i < deckList.length; i++) {
+		const [setNumber, set] = deckList[i].split(" ");
+		const card = card_db.find((c) => c.setNumber === setNumber && c.set === set);
+		if (card) {
+			deck.push(card);
+		}
+	}
+
+	updateDeckList();
+	deckBuilder();
+
+	//if deck is different from local storage, change save state to orange
+	if (JSON.stringify(deck) != localStorage.getItem("deck_" + selectedDeck)) {
+		changeSaveState(1);
+	} else {
+		changeSaveState(2);
+	}
+
+	$("#menu_deck_port").hide();
+	$("#menu_deck_builder").show();
+});
+
+// Copy the deck to clipboard
+$("#menu_deck_port_buttons_copy").click(function() {
+	const textBox = document.querySelector("#menu_deck_port_textbox_text");
+	textBox.select();
+	navigator.clipboard.writeText(textBox.value);
+});
+
+// paste from clipboard to textbox
+$("#menu_deck_port_buttons_paste").click(async function() {
+	const textBox = document.querySelector("#menu_deck_port_textbox_text");
+	textBox.focus();
+	textBox.value = await navigator.clipboard.readText();
+});
+
+$("#menu_deck_port_buttons_cancel").click(function() {
+	$("#menu_deck_builder").show();
+	$("#menu_deck_port").hide();
+});
+
 // Update the local storage for deck_selectedDeck_name when the name is changed
 $("#header_bar_input").change(function() {
 	localStorage.setItem("deck_" + selectedDeck + "_name", $("#header_bar_input").val());

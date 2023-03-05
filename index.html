@@ -200,6 +200,7 @@
 				<button id="header_bar_button_load">Load</button>
 				<button id="header_bar_button_clear">Clear</button>
 				<button id="header_bar_button_delete">Delete</button>
+				<button id="header_bar_button_port">Import/Export</button>
 			</div>
 		</div>
 		<!-- Show cards currently added to the deck -->
@@ -286,6 +287,20 @@
 		</div>
 		<!-- Show list of all cards able to be put into the deck -->
 		<div id="card_list_cards"></div>
+	</div>
+	<div id="menu_deck_port" style="display: none;">
+		<div id="menu_deck_port_title">Deck Import/Export</div>
+		<div class="menu_deck_port_buttons">
+			<button id="menu_deck_port_buttons_save">Save</button>
+			<button id="menu_deck_port_buttons_cancel">Cancel</button>
+		</div>
+		<div class="menu_deck_port_buttons">
+			<button id="menu_deck_port_buttons_copy">Copy</button>
+			<button id="menu_deck_port_buttons_paste">Paste</button>
+		</div>
+		<div id="menu_deck_port_textbox">
+			<textarea id="menu_deck_port_textbox_text" rows="10" cols="50" style="resize: none;"></textarea>
+		</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<script src="assets/scripts/generate_card_db.js"></script>
