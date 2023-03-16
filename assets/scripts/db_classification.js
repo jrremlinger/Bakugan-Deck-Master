@@ -1,4 +1,4 @@
-let card_db = [...Array(1264)].map(() => ({}));
+let card_db = [...Array(1265)].map(() => ({}));
 populateCardDB()
 
 // Init values to prevent errors
@@ -347,6 +347,8 @@ for (let i = 0; i < card_db.length; i++) {
 			card_db[i].type = "EVO";
 
 		// Set card factions
+		if (card_db[i].setNumber == 1)
+			card_db[i].faction = [ "DARKUS" ];
 		if (card_db[i].setNumber >= 2 && card_db[i].setNumber <= 3)
 			card_db[i].faction = [ "AQUOS" ];
 		if (card_db[i].setNumber == 4)
