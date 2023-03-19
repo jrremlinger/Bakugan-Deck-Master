@@ -3,6 +3,10 @@
 	font-family: Arial, Helvetica, sans-serif
 }
 
+#info_area * {
+	user-select: all;
+}
+
 #builder_deck_list_cards {
 	display: flex;
 	flex-wrap: wrap;
