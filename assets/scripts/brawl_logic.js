@@ -1673,8 +1673,7 @@ function energizeFromCharacter(x = 0, charged = 0) {
 		characters[expandedCharacter].gear2 = null;
 	}
 
-	characterOverlay(expandedCharacter);
-	updateUI();
+	hideOverlay();
 }
 
 function discardFromCharacter(x = 0) {
@@ -1691,8 +1690,7 @@ function discardFromCharacter(x = 0) {
 		characters[expandedCharacter].gear2 = null;
 	}
 
-	characterOverlay(expandedCharacter);
-	updateUI();
+	hideOverlay();
 }
 
 function handFromCharacter(x = 0) {
@@ -1709,8 +1707,7 @@ function handFromCharacter(x = 0) {
 		characters[expandedCharacter].gear2 = null;
 	}
 
-	characterOverlay(expandedCharacter);
-	updateUI();
+	hideOverlay();
 }
 
 function toggleControl() {
@@ -2058,7 +2055,9 @@ function clearBatch() {
 }
 
 function characterOverlay(character = 0) {
-	// check if character has a gear or evo attacged
+	
+
+	// check if character has a gear or evo attached
 	if (characters[character].evo || characters[character].gear1 || characters[character].gear2) {
 		expandedCharacter = character;
 		
@@ -2087,6 +2086,17 @@ function characterOverlay(character = 0) {
 				hideOverlay()
 			}
 		});
+	}
+
+	if (characters[character].evo && !characters[character].gear1 && !characters[character].gear2) {
+		// code to be executed if only characters[character].evo is true
+		setOverlayButtons(18)
+	} else if (!characters[character].evo && characters[character].gear1 && !characters[character].gear2) {
+		// code to be executed if only characters[character].gear1 is true
+		setOverlayButtons(19)
+	} else if (!characters[character].evo && !characters[character].gear1 && characters[character].gear2) {
+		// code to be executed if only characters[character].gear2 is true
+		setOverlayButtons(20)
 	}
 }
 
