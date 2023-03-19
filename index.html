@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Bakugan Deck Builder and TCG companion.">
 	<meta property="og:image" content="assets/icons/Logo.png">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
 	<link rel="stylesheet" href="assets/style.css">
 	<title>Bakugan Deck Master</title>
 </head>
@@ -15,27 +16,32 @@
 		<button id="brawl" onclick="$('#menu_main').hide(); $('#deck_select_menu').show(); checkValidDecks();">Brawl</button>
 		<button id="deck_builder" onclick="$('#menu_main').hide(); $('#menu_deck_options').show();">Deck Builder</button>
 		<div id="info_area">
-			<p>For educational and non-profit purposes</p>
 			<p><a href="https://github.com/jrremlinger/Bakugan-Deck-Master">GitHub Link</a></p>
 			<p><a href="mailto:bakugandeckmaster@gmail.com">Feedback Email</a> - If you have a card that is missing, please send scans here as well! If link isn't working use bakugandeckmaster@gmail.com</p>
 			<h3>Info</h3>
-			<p>This is the Bakugan Deck Master, an app designed to emulate and substitute the 40-card deck used in the Bakugan Pro TCG.</p>
-			<p>It is designed for educational purposes and is not affiliated with Spin Master in any way.</p>
-			<p>The goal of this project is to make the TCG more accessible to all and to share the experience with those who don't have access to the cards.</p>
-			<p>Please keep in mind that this site is designed mainly for use on phones/mobile devices. Reordering cards does NOT work with a mouse.</p>
-			<p>Also I am not by any means a graphic designer, this app is focused on functionality rather than looking fancy.</p>
+			<p>
+				This is the Bakugan Deck Master, an app designed to emulate and substitute the 40-card deck used in the Bakugan Pro TCG.<br>
+				It is designed for educational purposes and is not affiliated with Spin Master in any way.<br>
+				The goal of this project is to make the TCG more accessible to all and to share the experience with those who don't have access to the cards.<br>
+				Please keep in mind that this site is designed mainly for use on phones/mobile devices. Reordering cards does NOT work with a mouse.<br>
+				Also I am not by any means a graphic designer, this app is focused on functionality rather than looking fancy.
+			</p>
 			<h3>Deck Builder</h3>
-			<p>The Deck Builder is pretty self-explanatory, you can choose a deck slot and then add cards to it by searching or filtering to find what you want.</p>
-			<p>The cards available are are combination of what is available on the wiki, my own personal collection, and cards submitted by others. Use the feedback email to send me any missing card scans please!</p>
-			<p>When you save a deck it is saved in your browser's cache so you can close the page without losing it. You can also import/export decks as text!</p>
-			<p>Keep in mind there is built-in deck validation, so if your deck says it's not valid, it won't show up for you to use it in the Brawl mode</p>
-			<p>Currently there is a deck limit of 20, this is due to it just being easier to program. If there are a lot of requests for it, I can work on making it infinite.</p>
+			<p>
+				The Deck Builder is pretty self-explanatory, you can choose a deck slot and then add cards to it by searching or filtering to find what you want.<br>
+				The cards available are are combination of what is available on the wiki, my own personal collection, and cards submitted by others. Use the feedback email to send me any missing card scans please!<br>
+				When you save a deck it is saved in your browser's cache so you can close the page without losing it. You can also import/export decks as text!<br>
+				Keep in mind there is built-in deck validation, so if your deck says it's not valid, it won't show up for you to use it in the Brawl mode<br>
+				Currently there is a deck limit of 20, this is due to it just being easier to program. If there are a lot of requests for it, I can work on making it infinite.
+			</p>
 			<h3>Brawl!</h3>
-			<p>This is the gameplay simulator, after choosing between your valid decks it will set up a playspace for you to simulate everything you could do with the physical cards.</p>
-			<p>I plan to make more in-depth details eventually, but I tried to make it as straightforward as possible.</p>
-			<p>Do keep in mind, the card details such as energy cost and action description are NOT implemented. My site gives you the same freedom that real cards have.</p>
-			<p>This has the advantage of letting users easily recover mistakes by letting you manipulate the cards however you need.</p>
-			<p>The only things on a card that are taken into account are mainly the card type (you can't play an action card as a hero). It falls on the user to determine usage on the cards beyond that point.</p>
+			<p>
+				This is the gameplay simulator, after choosing between your valid decks it will set up a playspace for you to simulate everything you could do with the physical cards.<br>
+				I plan to make more in-depth details eventually, but I tried to make it as straightforward as possible.<br>
+				Do keep in mind, the card details such as energy cost and action description are NOT implemented. My site gives you the same freedom that real cards have.<br>
+				This has the advantage of letting users easily recover mistakes by letting you manipulate the cards however you need.<br>
+				The only things on a card that are taken into account are mainly the card type (you can't play an action card as a hero). It falls on the user to determine usage on the cards beyond that point.
+			</p>
 		</div>
 	</div>
 	<!-- Menu for selecting a deck -->
@@ -176,7 +182,7 @@
 		<button id="menu_deck_options_button_back" onclick="$('#menu_deck_options').hide(); $('#menu_main').show();">Back</button>
 		<!-- Display 20 deck buttons, when clicked open the deck builder with that deck id selected -->
 		<div id="deck_list">
-			<div id="deck_list_title">Deck List</div>
+			<div id="deck_list_title"><h3 style="margin: 0;">Deck List</h3></div>
 			<div id="deck_list_buttons">
 				<button id="deck_list_button_1" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(1);">Deck 1</button>
 				<button id="deck_list_button_2" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(2);">Deck 2</button>
@@ -188,6 +194,7 @@
 				<button id="deck_list_button_8" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(8);">Deck 8</button>
 				<button id="deck_list_button_9" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(9);">Deck 9</button>
 				<button id="deck_list_button_10" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(10);">Deck 10</button>
+				<br>
 				<button id="deck_list_button_11" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(11);">Deck 11</button>
 				<button id="deck_list_button_12" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(12);">Deck 12</button>
 				<button id="deck_list_button_13" onclick="$('#menu_deck_options').hide(); $('#menu_deck_builder').show(); deckBuilderInit(13);">Deck 13</button>
@@ -213,7 +220,7 @@
 		</div>
 		<!-- header bar -->
 		<div id="header_bar">
-			<div id="header_bar_title">Deck Builder</div>
+			<div id="header_bar_title"><h1>Deck Builder</h1></div>
 			<!-- Text box to rename current deck -->
 			<input type="text" id="header_bar_input" placeholder="Deck Name">
 			<!-- button to hide deck builder -->
@@ -229,6 +236,7 @@
 		<!-- Show cards currently added to the deck -->
 		<div id="builder_deck_list_title">Deck Total: 0</div>
 		<div id="builder_deck_list_cards"></div>
+		<h2 style="margin: 0;">Filtering</h2>
 		<!-- Search bar to search card names -->
 		<div id="search_bar">
 			<input type="text" id="search_bar_input" placeholder="Search...">
