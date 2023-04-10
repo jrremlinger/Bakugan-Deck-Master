@@ -1,4 +1,4 @@
-let card_db = [...Array(1265)].map(() => ({}));
+let card_db = [...Array(1266)].map(() => ({}));
 populateCardDB()
 
 // Init values to prevent errors
@@ -276,7 +276,7 @@ for (let i = 0; i < card_db.length; i++) {
 		// Set card factions
 		if (card_db[i].setNumber <= 6 || (card_db[i].setNumber >= 133 && card_db[i].setNumber <= 137) || (card_db[i].setNumber >= 142 && card_db[i].setNumber <= 145) || card_db[i].setNumber == 201)
 			card_db[i].faction = [ "AQUOS" ];
-		if ((card_db[i].setNumber >= 11 && card_db[i].setNumber <= 20) || (card_db[i].setNumber >= 157 && card_db[i].setNumber <= 161) || (card_db[i].setNumber >= 166 && card_db[i].setNumber <= 167) || (card_db[i].setNumber >= 206 && card_db[i].setNumber <= 209))
+		if ((card_db[i].setNumber >= 11 && card_db[i].setNumber <= 20) || (card_db[i].setNumber >= 157 && card_db[i].setNumber <= 161) || (card_db[i].setNumber >= 166 && card_db[i].setNumber <= 167) || (card_db[i].setNumber >= 206 && card_db[i].setNumber <= 211))
 			card_db[i].faction = [ "DARKUS" ];
 		if ((card_db[i].setNumber >= 21 && card_db[i].setNumber <= 26) || (card_db[i].setNumber >= 168 && card_db[i].setNumber <= 171) || card_db[i].setNumber == 176)
 			card_db[i].faction = [ "HAOS" ];
