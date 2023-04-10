@@ -406,11 +406,11 @@ function setOverlayButtons(x = 0) {
 				<div style="display: flex; align-items: center; color: white;">Choose a valid Character: </div>`
 			);
 
-			if (characters[0].faction == hand[expandedCard].faction) 
+			if (hand[expandedCard].faction.includes(characters[0].faction)) 
 				$("#brawl_overlay_buttons").append(`<button onclick="setOverlayButtons(9);">Character 1 <img style="height: 20px;" src="assets/svg/BBP_${characters[0].faction}.svg" /></button>`);
-			else if (characters[1].faction == hand[expandedCard].faction)
+			if (hand[expandedCard].faction.includes(characters[1].faction))
 				$("#brawl_overlay_buttons").append(`<button onclick="setOverlayButtons(10);">Character 2 <img style="height: 20px;" src="assets/svg/BBP_${characters[1].faction}.svg" /></button>`);
-			else if (characters[2].faction == hand[expandedCard].faction)
+			if (hand[expandedCard].faction.includes(characters[2].faction))
 				$("#brawl_overlay_buttons").append(`<button onclick="setOverlayButtons(11);">Character 3 <img style="height: 20px;" src="assets/svg/BBP_${characters[2].faction}.svg" /></button>`);
 
 			$("#brawl_overlay_buttons").append(`
