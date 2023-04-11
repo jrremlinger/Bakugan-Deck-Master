@@ -9,7 +9,7 @@ function cardClickListener() {
 		// Set selected card to be the card that was clicked by comparing the number within it to the card_db array set numbers and the set name
 		selectedCard = card_db.filter(card => card.setNumber == $(this).attr("src").split("_")[3] && card.set == $(this).attr("src").split("_")[5])[0];
 		// Update card overlay text to reflect the selected card amount
-		$("#card_overlay_amount").text("Amount in Deck: " + deck.filter(card => card.name == selectedCard.name).length);
+		$("#card_overlay_amount").text("Amount in Deck: " + deck.filter(card => card.setNumber == selectedCard.setNumber && card.set == selectedCard.set).length);
 
 		// Show the overlay
 		$("#card_overlay").show();
@@ -151,7 +151,7 @@ function removeCardFromDeck(card) {
 	let match = deck.find(d => JSON.stringify(d) === JSON.stringify(card));
 	if (match) {
 		let index = deck.indexOf(match);
-    	deck.splice(index, 1);
+		deck.splice(index, 1);
 		updateDeckList();
 		deckBuilder();
 		if (JSON.stringify(deck) == JSON.stringify(JSON.parse(localStorage.getItem("deck_" + selectedDeck))))
@@ -183,8 +183,7 @@ function updateDeckList() {
 	let amountLocationDiv = null;
 	for (let i = 0; i < deck.length; i++) {
 		// Check if the card is the first card of its setNumber and set
-		if (i == 0 || deck[i].name != deck[i - 1].name) {
-		// if (i == 0 || (deck[i].setNumber != deck[i - 1].setNumber && deck[i].set != deck[i - 1].set)) {
+		if (i == 0 || (deck[i].setNumber != deck[i - 1].setNumber && deck[i].set != deck[i - 1].set)) {
 
 			// Use different ID for flip cards
 			if (deck[i].type == "FLIP") 
@@ -217,7 +216,7 @@ function updateDeckList() {
 function getCardAmountInDeck(card) {
 	let amount = 0;
 	for (let i = 0; i < deck.length; i++) {
-		if (deck[i].name == card.name) {
+		if (deck[i].setNumber == card.setNumber && deck[i].set == card.set) {
 			amount++;
 		}
 	}
