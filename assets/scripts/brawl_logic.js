@@ -1982,12 +1982,13 @@ function buildCardPath(x, flag = false) {
 			case "AA": root = "assets/cards/03_AA/thumbnail/thumb_ENG_"; break;
 			case "AV": root = "assets/cards/04_AV/thumbnail/thumb_ENG_"; break;
 			case "FF": root = "assets/cards/05_FF/thumbnail/thumb_ENG_"; break;
-			case "SV": root = "assets/cards/06_SV/thumbnail/thumb_ENG_"; break;
-			case "SG": root = "assets/cards/07_SG/thumbnail/thumb_ENG_"; break;
-			case "GG": root = "assets/cards/08_GG/thumbnail/thumb_ENG_"; break;
-			case "EV": root = "assets/cards/09_EV/thumbnail/thumb_ENG_"; break;
-			case "EV2": root = "assets/cards/10_EV2/thumbnail/thumb_ENG_"; break;
-			case "LE": root = "assets/cards/11_LE/thumbnail/thumb_ENG_"; break;
+			case "PS1": root = "assets/cards/06_PS1/thumbnail/thumb_ENG_"; break;
+			case "SV": root = "assets/cards/07_SV/thumbnail/thumb_ENG_"; break;
+			case "SG": root = "assets/cards/08_SG/thumbnail/thumb_ENG_"; break;
+			case "GG": root = "assets/cards/09_GG/thumbnail/thumb_ENG_"; break;
+			case "EV": root = "assets/cards/10_EV/thumbnail/thumb_ENG_"; break;
+			case "EV2": root = "assets/cards/11_EV2/thumbnail/thumb_ENG_"; break;
+			case "LE": root = "assets/cards/12_LE/thumbnail/thumb_ENG_"; break;
 		}
 	} else {
 		switch (x.set) {
@@ -1996,12 +1997,13 @@ function buildCardPath(x, flag = false) {
 			case "AA": root = "assets/cards/03_AA/ENG_"; break;
 			case "AV": root = "assets/cards/04_AV/ENG_"; break;
 			case "FF": root = "assets/cards/05_FF/ENG_"; break;
-			case "SV": root = "assets/cards/06_SV/ENG_"; break;
-			case "SG": root = "assets/cards/07_SG/ENG_"; break;
-			case "GG": root = "assets/cards/08_GG/ENG_"; break;
-			case "EV": root = "assets/cards/09_EV/ENG_"; break;
-			case "EV2": root = "assets/cards/10_EV2/ENG_"; break;
-			case "LE": root = "assets/cards/11_LE/ENG_"; break;
+			case "PS1": root = "assets/cards/06_PS1/ENG_"; break;
+			case "SV": root = "assets/cards/07_SV/ENG_"; break;
+			case "SG": root = "assets/cards/08_SG/ENG_"; break;
+			case "GG": root = "assets/cards/09_GG/ENG_"; break;
+			case "EV": root = "assets/cards/10_EV/ENG_"; break;
+			case "EV2": root = "assets/cards/11_EV2/ENG_"; break;
+			case "LE": root = "assets/cards/12_LE/ENG_"; break;
 		}
 	}
 

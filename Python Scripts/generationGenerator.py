@@ -8,12 +8,13 @@ directories = [
     'assets/cards/03_AA', 
     'assets/cards/04_AV', 
     'assets/cards/05_FF', 
-    'assets/cards/06_SV', 
-    'assets/cards/07_SG', 
-    'assets/cards/08_GG', 
-    'assets/cards/09_EV', 
-    'assets/cards/10_EV2',
-    'assets/cards/11_LE',
+    'assets/cards/06_PS1',
+    'assets/cards/07_SV', 
+    'assets/cards/08_SG', 
+    'assets/cards/09_GG', 
+    'assets/cards/10_EV', 
+    'assets/cards/11_EV2',
+    'assets/cards/12_LE',
 ]
 
 # open a file to write the output

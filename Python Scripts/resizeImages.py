@@ -1,7 +1,7 @@
 from PIL import Image
 import os
 
-folder = 'assets/cards/08_GG'
+folder = 'assets/cards/06_PS1'
 
 for filename in os.listdir(folder):
     if filename.endswith('.jpg') or filename.endswith('.png'):
