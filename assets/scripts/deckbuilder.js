@@ -183,7 +183,6 @@ function updateDeckList() {
 	let amountLocationDiv = null;
 	for (let i = 0; i < deck.length; i++) {
 		// Check if the card is the first card of its setNumber and set
-		// if (i == 0 || deck[i].name != deck[i - 1].name) {
 		if (i == 0 || deck[i].setNumber != deck[i - 1].setNumber || deck[i].set != deck[i - 1].set) {
 
 			// Use different ID for flip cards
