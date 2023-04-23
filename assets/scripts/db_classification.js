@@ -1,4 +1,4 @@
-let card_db = [...Array(1287)].map(() => ({}));
+let card_db = [...Array(1301)].map(() => ({}));
 populateCardDB()
 
 // Init values to prevent errors
@@ -341,7 +341,7 @@ for (let i = 0; i < card_db.length; i++) {
 
 	if (card_db[i].set == "EV2") {
 		// Set card types
-		if (card_db[i].setNumber <= 48 || card_db[i].setNumber == 189)
+		if (card_db[i].setNumber <= 48 || (card_db[i].setNumber >= 118 && card_db[i].setNumber <= 189))
 			card_db[i].type = "GEOGAN";
 		else if (card_db[i].setNumber <= 63)
 			card_db[i].type = "EVO";
@@ -349,12 +349,16 @@ for (let i = 0; i < card_db.length; i++) {
 		// Set card factions
 		if (card_db[i].setNumber == 36 || card_db[i].setNumber == 42)
 			card_db[i].faction = [ "AQUOS" ];
-		if (card_db[i].setNumber == 38)
+		if (card_db[i].setNumber == 38 || card_db[i].setNumber == 53 || card_db[i].setNumber == 118)
 			card_db[i].faction = [ "DARKUS" ];
-		if (card_db[i].setNumber == 40)
+		if (card_db[i].setNumber == 40 || card_db[i].setNumber == 59 || card_db[i].setNumber == 167)
 			card_db[i].faction = [ "PYRUS" ];
-		if (card_db[i].setNumber >= 48 && card_db[i].setNumber <= 189)
+		if (card_db[i].setNumber == 48 || (card_db[i].setNumber >= 61 && card_db[i].setNumber <= 63) || card_db[i].setNumber == 189)
 			card_db[i].faction = [ "VENTUS" ];
+		if (card_db[i].setNumber >= 55 && card_db[i].setNumber <= 57)
+			card_db[i].faction = [ "HAOS" ];
+		if (card_db[i].setNumber == 50)
+			card_db[i].faction = [ "AURELUS" ];
 	}
 
 	if (card_db[i].set == "LE") {
@@ -363,11 +367,11 @@ for (let i = 0; i < card_db.length; i++) {
 			card_db[i].type = "BAKU-GEAR";
 		else if (card_db[i].setNumber <= 10)
 			card_db[i].type = "GEOGAN";
-		else if (card_db[i].setNumber <= 20)
+		else if (card_db[i].setNumber <= 22)
 			card_db[i].type = "EVO";
 
 		// Set card factions
-		if (card_db[i].setNumber == 1)
+		if (card_db[i].setNumber == 1 || (card_db[i].setNumber >= 6 && card_db[i].setNumber <= 7) || (card_db[i].setNumber >= 11 && card_db[i].setNumber <= 12))
 			card_db[i].faction = [ "DARKUS" ];
 		if (card_db[i].setNumber >= 2 && card_db[i].setNumber <= 3)
 			card_db[i].faction = [ "AQUOS" ];
@@ -377,11 +381,13 @@ for (let i = 0; i < card_db.length; i++) {
 			card_db[i].faction = [ "VENTUS" ];
 		if ((card_db[i].setNumber >= 9 && card_db[i].setNumber <= 10) || card_db[i].setNumber == 17)
 			card_db[i].faction = [ "PYRUS" ];
-		if (card_db[i].setNumber == 7 || card_db[i].setNumber == 11)
-			card_db[i].faction = [ "DARKUS" ];
+		if (card_db[i].setNumber >= 21 && card_db[i].setNumber <= 22)
+			card_db[i].faction = [ "HAOS" ];
+		if (card_db[i].setNumber >= 19 && card_db[i].setNumber <= 20)
+			card_db[i].faction = [ "PYRUS", "DARKUS" ];
+		if (card_db[i].setNumber == 16)
+			card_db[i].faction = [ "VENTUS", "HAOS" ];
 		if (card_db[i].setNumber >= 13 && card_db[i].setNumber <= 15)
 			card_db[i].faction = [ "AURELUS" ];
-		if (card_db[i].setNumber == 19 || card_db[i].setNumber == 20)
-			card_db[i].faction = [ "PYRUS", "DARKUS" ];
 	}
 }
